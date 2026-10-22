@@ -2,7 +2,7 @@
 
 [![Validar portfólio](https://github.com/Neitolas/portfolio-nathan/actions/workflows/ci.yml/badge.svg)](https://github.com/Neitolas/portfolio-nathan/actions/workflows/ci.yml)
 
-Portfólio pessoal com **11 projetos e estudos**, experiência, formação e contato. Interface autoral em grafite e índigo, com conteúdo rastreável às fontes públicas e ao briefing fornecido.
+Portfólio pessoal de Nathan, com **11 projetos e estudos**, experiência, formação e contato. Reconstruído a pedido do titular para seguir de perto a apresentação da referência: abas com ícones, fonte Chakra Petch, círculos translúcidos, cartões horizontais e rodapé fixo. Conteúdo próprio, retrato da foto fornecida e implementação independente.
 
 ![Início do portfólio](docs/evidencias/inicio-1440.png)
 
@@ -44,14 +44,18 @@ node.exe $portfolioNpmCli run dev
 | `src/render.js` | HTML semântico, escape de conteúdo e validação de protocolos |
 | `src/portrait.js` | Retrato ASCII gerado a partir da foto fornecida pelo titular |
 | `scripts/Gerar-Retrato.ps1` | Gerador local de caracteres com System.Drawing no Windows |
-| `src/main.js` | Menu móvel e filtros acessíveis |
+| `src/main.js` | Filtros acessíveis e diálogo de contato |
+| `src/paint.js` | Desenho, moldes próprios, upload local, desfazer e exportação PNG |
 | `src/style.css` | Identidade visual, layout responsivo e movimento reduzido |
-| `vite.config.js` | HTML completo no desenvolvimento/build e assets relativos |
+| `vite.config.js` | Cinco entradas HTML estáticas e assets relativos |
+| `index.html`, `projects/`, `infra/`, `paint/`, `about/` | Entradas de Home, Projetos, Infra, Paint e Sobre |
+| `public/fonts/` | Chakra Petch Regular/Bold e licença SIL OFL 1.1 |
 | `tests/render.test.js` | Testes nativos de renderização e segurança do HTML |
 | `tests/browser-checks.js` | Função de QA para executar com uma página Playwright existente |
+| `tests/paint-checks.js` | Regressões de toque, carregamento de imagens e janelas baixas |
 | `.github/workflows/ci.yml` | Instalação, lint, testes e build em pushes/PRs |
 
-Os textos principais são gerados no HTML pelo Vite. Identidade, projetos, navegação e contato continuam disponíveis sem JavaScript no navegador. Não há backend, formulário simulado, chat ou dependências de runtime.
+Os textos são gerados no HTML pelo Vite. Navegação entre páginas, identidade, projetos e links do rodapé funcionam sem JavaScript. O Paint e o diálogo de contato usam JavaScript nativo; o contato abre e-mail, LinkedIn ou GitHub reais. Não há backend, conversa simulada ou dependências de runtime. As fontes são locais, sem chamadas ao Google durante o uso.
 
 ## Fontes e validação
 
@@ -65,7 +69,7 @@ Os textos principais são gerados no HTML pelo Vite. Identidade, projetos, naveg
 
 O LinkedIn não pôde ser lido nesta execução. O link do briefing foi preservado e sua divergência com o GitHub está registrada nas fontes. Datas e vínculos atuais devem ser confirmados antes de atualizar o conteúdo como atual. Nenhuma experiência, imagem ou infraestrutura da referência foi atribuída a Nathan.
 
-O retrato ASCII foi criado com a foto fornecida diretamente pelo titular nesta conversa e substitui o monograma. Seus caracteres já estão no HTML e aparecem sem JavaScript. A fotografia original não é necessária para executar o site; a origem não é apresentada como uma extração do LinkedIn.
+O retrato ASCII foi criado com a foto fornecida diretamente pelo titular nesta conversa. Seus caracteres já estão no HTML, sobre preto e com contorno branco. A fotografia original não é necessária para executar o site; a origem não é apresentada como uma extração do LinkedIn. A fonte Chakra Petch foi obtida do [Google Fonts](https://github.com/google/fonts/tree/main/ofl/chakrapetch) e é distribuída com sua [licença](public/fonts/OFL.txt).
 
 ## Versionamento e publicação
 
@@ -82,4 +86,4 @@ Para publicar o site em um serviço estático, use:
 | Diretório de saída | `dist` |
 | Branch de produção sugerida | `main` |
 
-O `base: './'` permite servir os mesmos arquivos na raiz ou em subpasta. A navegação usa âncoras e não exige fallback de SPA para rotas. Após escolher o domínio, configurar canonical, `og:url` e imagem social absoluta com o endereço real. Não há deploy automático para nenhum host nesta versão; o workflow incluído executa verificações.
+O `base: './'` permite servir os arquivos na raiz ou em subpasta. Cada rota tem seu próprio `index.html` e não exige fallback de SPA: `/`, `/projects/`, `/infra/`, `/paint/` e `/about/`. Isso foi verificado também sob `/demo/`. Após escolher o domínio, configurar canonical, `og:url` e imagem social absoluta com o endereço real. Não há deploy automático para um host; o workflow incluído executa verificações.

@@ -1,119 +1,124 @@
 async (sourcePage, { artifactDirectory } = {}) => {
-  const qaContext = await sourcePage.context().browser().newContext();
-  const page = await qaContext.newPage();
+  const browser = sourcePage.context().browser();
+  const context = await browser.newContext({ reducedMotion: 'reduce' });
+  const page = await context.newPage();
+  const base = 'http://127.0.0.1:4173/';
+  const errors = [];
+  const failedRequests = [];
+  const requests = [];
+  const results = [];
+  const check = (condition, message) => { if (!condition) throw new Error(message); };
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('request', request => requests.push(request.url()));
+  page.on('requestfailed', request => failedRequests.push(request.url()));
+  page.on('response', response => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   try {
-    const base = 'http://127.0.0.1:4173/';
-    const errors = [];
-    const failedRequests = [];
-    const requests = [];
-    const results = [];
-    let projectCount = 0;
-    const check = (condition, message) => { if (!condition) throw new Error(message); };
-    page.on('pageerror', (error) => errors.push(error.message));
-    page.on('request', (request) => requests.push(request.url()));
-    page.on('requestfailed', (request) => failedRequests.push(request.url()));
-    page.on('response', (response) => { if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
-
     for (const width of [360, 768, 1440]) {
       await page.setViewportSize({ width, height: 960 });
-      await page.goto(base, { waitUntil: 'networkidle' });
-      check((await page.title()).includes('Nathan Nogueira Carrara'), 'Título incorreto');
-      check(await page.locator('h1').count() === 1, 'É necessário um h1');
-      const portrait = await page.locator('[data-portrait]').evaluate((element) => {
-        const frame = element.closest('figure');
-        return {
-          textLength: element.textContent.length,
-          hiddenFromScreenReader: element.getAttribute('aria-hidden') === 'true',
-          label: frame.getAttribute('aria-label'),
-          bounds: element.getBoundingClientRect().toJSON(),
-          frame: frame.getBoundingClientRect().toJSON(),
-          background: getComputedStyle(frame).backgroundColor,
-          backgroundImage: getComputedStyle(frame).backgroundImage,
-        };
-      });
-      check(portrait.textLength > 6000 && portrait.hiddenFromScreenReader && portrait.label.includes('Nathan'), 'Retrato ASCII ou alternativa acessível ausente');
-      check(portrait.bounds.left >= portrait.frame.left && portrait.bounds.right <= portrait.frame.right, `Retrato corta nas laterais em ${width}`);
-      check(portrait.bounds.top >= portrait.frame.top && portrait.bounds.bottom <= portrait.frame.bottom, `Retrato corta na vertical em ${width}`);
-      check(portrait.background === 'rgb(0, 0, 0)' && portrait.backgroundImage === 'none', 'O fundo do retrato deve ser preto puro');
-      check(await page.locator('.identity-top, .identity-bottom, .hero-baseline, .art-topline, .art-bottomline, .skills-note').count() === 0, 'Rótulos decorativos ainda presentes');
-      const projectCategories = await page.locator('[data-project]').evaluateAll((elements) => elements.map((element) => element.dataset.project));
-      projectCount = projectCategories.length;
-      check(projectCount >= 11, 'O catálogo ampliado deveria ter ao menos onze projetos e estudos');
-      check(await page.locator('[data-project]:visible').count() === projectCount, 'Todos os projetos devem aparecer inicialmente');
-      const dimensions = await page.evaluate(() => ({ width: window.innerWidth, scrollWidth: document.documentElement.scrollWidth }));
-      check(dimensions.scrollWidth <= width, `Rolagem horizontal em ${width}: ${dimensions.scrollWidth}`);
+      for (const [key, path] of [['home', ''], ['projects', 'projects/'], ['infra', 'infra/'], ['paint', 'paint/'], ['about', 'about/']]) {
+        await page.goto(base + path, { waitUntil: 'networkidle' });
+        await page.evaluate(() => document.fonts.ready);
+        check(await page.locator(`[data-page="${key}"]`).count() === 1, `Página incorreta: ${path}`);
+        check(await page.locator('h1').count() === 1, `Hierarquia incorreta: ${path}`);
+        check(await page.locator('nav a[aria-current="page"]').count() === 1, 'Aba atual ausente');
+        check(await page.getByRole('navigation').getByRole('link').count() === 5, 'Navegação incompleta');
+        const geometry = await page.evaluate(() => ({ viewport: window.innerWidth, body: document.documentElement.scrollWidth, main: document.querySelector('main').scrollWidth, available: document.querySelector('main').clientWidth, reduced: getComputedStyle(document.querySelector('.ambient i')).animationName }));
+        check(geometry.body <= geometry.viewport && geometry.main <= geometry.available + 1, `Rolagem horizontal em ${width}/${path}`);
+        check(geometry.reduced === 'none', 'Movimento reduzido não respeitado');
+        check(!/Wallace|wallacemv|Sem Parar/.test(await page.locator('body').innerText()), 'Conteúdo de terceiros no portfólio');
 
-      if (width === 360) {
-        const toggle = page.getByRole('button', { name: 'Menu', exact: true });
-        check(await toggle.isVisible(), 'Menu móvel ausente');
-        check(!(await page.locator('[data-nav]').isVisible()), 'Navegação móvel deveria começar fechada');
-        await toggle.focus();
-        await page.keyboard.press('Tab');
-        check(await page.evaluate(() => document.activeElement.getAttribute('href')) === '#projetos', 'Menu oculto entrou na navegação por teclado');
-        await toggle.click();
-        check(await page.locator('[data-nav]').isVisible(), 'Menu não abriu');
-        await page.getByRole('navigation').getByRole('link', { name: 'Experiência', exact: true }).focus();
+        const contact = page.getByRole('button', { name: 'Abrir contato', exact: true });
+        await contact.click();
+        const dialog = page.getByRole('dialog');
+        check(await dialog.isVisible(), 'Contato não abriu');
+        check(await dialog.getByRole('link', { name: 'Enviar um e-mail' }).getAttribute('href') === 'mailto:nathancarraranogueira@gmail.com', 'Contato incorreto');
         await page.keyboard.press('Escape');
-        check(await toggle.getAttribute('aria-expanded') === 'false', 'Escape não fechou o menu');
-        check(await toggle.evaluate((element) => element === document.activeElement), 'Escape não devolveu o foco');
-        await toggle.click();
-        await page.getByRole('navigation').getByRole('link', { name: 'Projetos', exact: true }).click();
-        check(page.url().endsWith('#projetos'), 'Âncora móvel não navegou');
-        check(await toggle.getAttribute('aria-expanded') === 'false', 'Navegação não fechou o menu');
-      }
+        check(!await dialog.isVisible(), 'Escape não fechou o contato');
+        check(await contact.evaluate(element => element === document.activeElement), 'Foco não voltou ao botão de contato');
 
-      for (const category of [...new Set(projectCategories)]) {
-        const filter = page.locator(`[data-filter="${category}"]`);
-        await filter.focus();
-        await page.keyboard.press('Space');
-        const expected = projectCategories.filter((item) => item === category).length;
-        check(await page.locator('[data-project]:visible').count() === expected, `Contagem incorreta no filtro ${category}`);
-        const visibleCategories = await page.locator('[data-project]:visible').evaluateAll((elements) => elements.map((element) => element.dataset.project));
-        check(visibleCategories.every((item) => item === category), `Filtro ${category} exibiu outra categoria`);
-        check(await filter.getAttribute('aria-pressed') === 'true', 'Estado acessível do filtro incorreto');
-        check(await page.locator('[data-filter-status]').textContent() === `${expected} ${expected === 1 ? 'projeto exibido' : 'projetos exibidos'}.`, 'Contagem acessível incorreta');
+        if (key === 'home') {
+          const portrait = await page.locator('[data-portrait]').evaluate(element => {
+            const frame = element.closest('figure');
+            const style = getComputedStyle(frame);
+            return { textLength: element.textContent.length, hidden: element.getAttribute('aria-hidden'), label: frame.getAttribute('aria-label'), bounds: element.getBoundingClientRect().toJSON(), frame: frame.getBoundingClientRect().toJSON(), background: style.backgroundColor, border: style.borderTopColor, borderWidth: style.borderTopWidth };
+          });
+          check(portrait.textLength > 14000 && portrait.hidden === 'true' && portrait.label.includes('Nathan'), 'Retrato incompleto');
+          check(portrait.background === 'rgb(0, 0, 0)' && portrait.border === 'rgb(255, 255, 255)' && portrait.borderWidth !== '0px', 'Fundo preto ou contorno branco ausente');
+          check(portrait.bounds.left >= portrait.frame.left && portrait.bounds.right <= portrait.frame.right && portrait.bounds.top >= portrait.frame.top && portrait.bounds.bottom <= portrait.frame.bottom, 'Retrato cortado');
+          check(await page.locator('.identity-top, .identity-bottom, .hero-baseline').count() === 0, 'Legendas decorativas retornaram');
+        }
+        if (key === 'projects') {
+          const categories = await page.locator('[data-project]').evaluateAll(elements => elements.map(element => element.dataset.project));
+          check(categories.length === 11, 'Catálogo incompleto');
+          const cards = await page.locator('[data-project]').evaluateAll(elements => elements.map(element => element.getBoundingClientRect().toJSON()));
+          check(cards.every((card, index) => index === 0 || card.top >= cards[index - 1].bottom), 'Projetos não estão em lista horizontal de cartões');
+          for (const category of [...new Set(categories)]) {
+            const button = page.locator(`[data-filter="${category}"]`);
+            await button.focus();
+            await page.keyboard.press('Space');
+            const count = categories.filter(item => item === category).length;
+            check(await page.locator('[data-project]:visible').count() === count, `Filtro incorreto: ${category}`);
+            check(await button.getAttribute('aria-pressed') === 'true', 'Estado do filtro incorreto');
+            check((await page.locator('[data-filter-status]').textContent()).startsWith(String(count)), 'Contagem acessível incorreta');
+          }
+          await page.getByRole('button', { name: 'Todos', exact: true }).click();
+          const details = page.locator('details').first();
+          await details.locator('summary').focus();
+          await page.keyboard.press('Enter');
+          check(await details.getAttribute('open') !== null, 'Detalhes não abriram pelo teclado');
+          check(await details.getByText('Contribuição', { exact: true }).isVisible(), 'Detalhes indisponíveis');
+          await details.locator('summary').press('Enter');
+          check(await page.getByRole('link', { name: 'Ver código de F.E.N.I.X.', exact: true }).getAttribute('href') === 'https://github.com/Neitolas/fenix', 'Código incorreto');
+        }
+        if (artifactDirectory) await page.screenshot({ path: `${artifactDirectory}/${key}-${width}.png`, fullPage: true });
       }
-      await page.getByRole('button', { name: 'Todos', exact: true }).click();
-      const details = page.locator('details').first();
-      await details.locator('summary').focus();
-      await page.keyboard.press('Enter');
-      check(await details.getAttribute('open') !== null, 'Detalhes não abriram com teclado');
-      check(await details.getByRole('link', { name: 'Ver implementação' }).isVisible(), 'Implementação indisponível');
-      await details.locator('summary').press('Enter');
-
-      await page.emulateMedia({ reducedMotion: 'reduce' });
-      for (const id of ['projetos', 'experiencia', 'sobre', 'contato']) {
-        await page.goto(`${base}#${id}`, { waitUntil: 'networkidle' });
-        const top = await page.locator(`#${id} h2`).evaluate((element) => element.getBoundingClientRect().top);
-        check(top >= 72, `Cabeçalho encobre ${id} em ${width}: ${top}`);
-      }
-      const motion = await page.evaluate(() => ({ scroll: getComputedStyle(document.documentElement).scrollBehavior, transition: getComputedStyle(document.querySelector('.button')).transitionDuration }));
-      check(motion.scroll === 'auto' && motion.transition === '0s', 'Movimento reduzido não respeitado');
-      await page.goto(base, { waitUntil: 'networkidle' });
-      if (artifactDirectory) {
-        await page.screenshot({ path: `${artifactDirectory}/viewport-${width}.png`, fullPage: true });
-      }
-      results.push({ width, horizontalOverflow: false, projectFilters: true, keyboardDetails: true, anchors: true, reducedMotion: true, mobileMenu: width === 360 ? true : 'não aplicável' });
+      await page.getByRole('navigation').getByRole('link', { name: 'Projetos', exact: true }).click();
+      check(page.url() === `${base}projects/`, 'Aba Projetos não navegou');
+      await page.reload({ waitUntil: 'networkidle' });
+      check(await page.locator('[data-project]').count() === 11, 'Recarregamento direto não funciona');
+      results.push({ width, pages: 5, horizontalOverflow: false, navigation: true, contactKeyboard: true, whitePortraitBorder: true, projectFilters: true, projectList: true, reducedMotion: true });
     }
 
-    const browser = page.context().browser();
-    const noJs = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 360, height: 960 } });
-    const staticPage = await noJs.newPage();
-    await staticPage.goto(base, { waitUntil: 'networkidle' });
-    check(await staticPage.getByRole('heading', { name: 'Nathan Nogueira Carrara', exact: true }).isVisible(), 'Identidade indisponível sem JS');
-    check(await staticPage.locator('[data-project]').count() === projectCount, 'Projetos indisponíveis sem JS');
-    check(await staticPage.locator('[data-portrait]').isVisible(), 'Retrato indisponível sem JS');
-    check((await staticPage.locator('[data-portrait]').textContent()).length > 6000, 'Retrato sem caracteres no HTML estático');
-    check(await staticPage.getByRole('navigation').isVisible(), 'Navegação indisponível sem JS');
-    check(await staticPage.getByRole('link', { name: 'Enviar um e-mail', exact: true }).getAttribute('href') === 'mailto:nathancarraranogueira@gmail.com', 'Contato incorreto');
-    await noJs.close();
-    check(errors.length === 0, `Erros no navegador: ${errors.join(', ')}`);
+    await page.goto(`${base}paint/`, { waitUntil: 'networkidle' });
+    await page.getByRole('button', { name: 'Colorir robô' }).click();
+    const canvas = page.locator('[data-paint-canvas]');
+    await page.getByRole('button', { name: 'Limpar', exact: true }).click();
+    const blank = await canvas.evaluate(element => element.toDataURL());
+    const bounds = await canvas.boundingBox();
+    check(Math.abs(bounds.width / bounds.height - 1000 / 620) < .01, 'Canvas está distorcido');
+    await page.mouse.move(bounds.x + bounds.width * .2, bounds.y + bounds.height * .3);
+    await page.mouse.down();
+    await page.mouse.move(bounds.x + bounds.width * .65, bounds.y + bounds.height * .6, { steps: 12 });
+    await page.mouse.up();
+    const drawn = await canvas.evaluate(element => element.toDataURL());
+    check(drawn !== blank, 'Pincel não desenhou');
+    await page.getByRole('button', { name: 'Desfazer', exact: true }).click();
+    check(await canvas.evaluate(element => element.toDataURL()) === blank, 'Desfazer não restaurou os pixels');
+    await canvas.focus();
+    await page.keyboard.press('Space');
+    await page.keyboard.press('ArrowRight');
+    await page.keyboard.press('ArrowDown');
+    await page.keyboard.press('Space');
+    check(await canvas.evaluate(element => element.toDataURL()) !== blank, 'Pincel pelo teclado não funciona');
+    const [download] = await Promise.all([page.waitForEvent('download'), page.getByRole('button', { name: 'Baixar PNG' }).click()]);
+    check(download.suggestedFilename() === 'desenho-nathan.png' && await download.failure() === null, 'Download PNG falhou');
+    await page.setViewportSize({ width: 640, height: 360 });
+    const landscape = await canvas.boundingBox();
+    check(landscape.width > 500 && landscape.height > 300, 'Paint encolhe em celular na horizontal');
+
+    const staticContext = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 360, height: 960 } });
+    try {
+      const staticPage = await staticContext.newPage();
+      await staticPage.goto(base, { waitUntil: 'networkidle' });
+      check(await staticPage.locator('[data-portrait]').isVisible(), 'Retrato indisponível sem JS');
+      await staticPage.getByRole('navigation').getByRole('link', { name: 'Projetos', exact: true }).click();
+      check(await staticPage.locator('[data-project]').count() === 11, 'Projetos indisponíveis sem JS');
+      await staticPage.getByRole('navigation').getByRole('link', { name: 'Sobre', exact: true }).click();
+      check(await staticPage.getByText('UNIMAR', { exact: true }).isVisible(), 'Formação indisponível sem JS');
+    } finally { await staticContext.close(); }
+    check(errors.length === 0, errors.join(', '));
     check(failedRequests.length === 0, `Recursos ausentes: ${failedRequests.join(', ')}`);
-    check(requests.every((url) => url.startsWith(base)), 'A página fez requisições externas');
-    await page.emulateMedia({ reducedMotion: 'no-preference' });
-    await page.goto(base);
-    return { results, projectCount, asciiPortrait: true, noJavaScript: true, pageErrors: errors, failedRequests, requestOrigins: [...new Set(requests.map((url) => new URL(url).origin))] };
-  } finally {
-    await qaContext.close();
-  }
+    check(requests.every(url => url.startsWith(base)), 'Requisições externas durante o uso');
+    return { results, projectCount: 11, paintDrawing: true, paintUndo: true, paintKeyboard: true, paintDownload: true, noJavaScriptNavigation: true, pageErrors: errors, failedRequests, requestOrigins: [...new Set(requests.map(url => new URL(url).origin))] };
+  } finally { await context.close(); }
 }

@@ -8,16 +8,11 @@ export const profile = {
   role: 'Desenvolvedor Full Stack Júnior',
   description: 'Desenvolvo aplicações web, APIs e integrações. Meu foco é conectar interfaces, regras de negócio e dados para resolver problemas reais.',
   email: 'nathancarraranogueira@gmail.com',
+  siteRepository: 'https://github.com/Neitolas/portfolio-nathan',
   links: {
     github: 'https://github.com/Neitolas',
     linkedin: 'https://www.linkedin.com/in/devnathannogueiracarrara/',
   },
-  navigation: [
-    { id: 'projetos', label: 'Projetos' },
-    { id: 'experiencia', label: 'Experiência' },
-    { id: 'sobre', label: 'Sobre' },
-    { id: 'contato', label: 'Contato' },
-  ],
   projects: [
     {
       id: 'fenix',
@@ -224,7 +219,11 @@ export const profile = {
     status: 'Graduação em andamento',
   },
   skills: [
-    { title: 'Aplicações e integrações', context: 'Experiência descrita no perfil público', items: ['Python', 'Django', 'React', 'APIs REST', 'PostgreSQL'] },
-    { title: 'Projetos e estudos', context: 'Código disponível nos repositórios', items: ['TypeScript', 'PHP', 'Vue', 'C# / ASP.NET Core', 'RAG', 'SQLite', 'MySQL', 'Composer', 'Git / GitHub'] },
+    { title: 'Backend & APIs', items: ['Python', 'Django', 'Django REST Framework', 'PHP', 'APIs REST'] },
+    { title: 'IA & integrações', items: ['RAG', 'Chatbots', 'Embeddings', 'Integrações REST'] },
+    { title: 'Bancos de dados', items: ['PostgreSQL', 'MySQL', 'SQLite', 'SQL'] },
+    { title: 'Frontend', items: ['React', 'TypeScript', 'JavaScript', 'Vue', 'HTML', 'CSS'] },
+    { title: 'Projetos & ferramentas', items: ['Git', 'GitHub', 'Composer', 'POO', 'Estruturas de dados', 'C# / ASP.NET Core'] },
+    { title: 'Desenvolvimento & sustentação', items: ['Manutenção de sistemas', 'Suporte a bancos de dados', 'Integrações', 'UX / Produto'] },
   ],
 };

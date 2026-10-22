@@ -1,86 +1,95 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { profile } from '../src/content.js';
-import { escapeHtml, renderPortfolio } from '../src/render.js';
+import { renderPortfolio, escapeHtml } from '../src/render.js';
 
-test('a página já contém identidade, projetos e destinos de navegação sem JavaScript no cliente', () => {
+const pages = ['home', 'projects', 'infra', 'paint', 'about'];
+
+test('as cinco páginas têm identidade própria, navegação real e aba atual', () => {
+  for (const page of pages) {
+    const html = renderPortfolio(profile, page);
+    assert.equal((html.match(/<h1[ >]/g) || []).length, 1);
+    assert.equal((html.match(/aria-current="page"/g) || []).length, 1);
+    assert.ok(html.includes(`data-page="${page}"`));
+    for (const label of ['Home', 'Projetos', 'Infra', 'Paint', 'Sobre']) assert.ok(html.includes(`>${label}</span>`));
+    assert.ok(html.includes(profile.email));
+    assert.ok(!/wallacemv|Wallace|Sem Parar|Kubernetes|Gemini|VPS Ubuntu/.test(html));
+    assert.ok(!/href="(?:#|)"/.test(html));
+  }
+});
+
+test('início tem retrato da foto, competências e experiências de Nathan no HTML', () => {
   const html = renderPortfolio(profile);
   assert.ok(html.includes(profile.name));
-  assert.equal((html.match(/<h1[ >]/g) || []).length, 1);
-  for (const section of ['inicio', 'projetos', 'experiencia', 'sobre', 'contato']) {
-    assert.ok(html.includes(`id="${section}"`), section);
-  }
-  for (const project of profile.projects) {
-    assert.ok(html.includes(project.title));
-    assert.ok(html.includes(project.url));
-  }
-  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
-  for (const [, anchor] of html.matchAll(/href="#([^"]+)"/g)) {
-    assert.ok(ids.includes(anchor), `Destino inexistente: ${anchor}`);
-  }
-});
-
-test('conteúdo editorial é escapado antes de entrar no HTML', () => {
-  const altered = structuredClone(profile);
-  altered.name = '<script>alert("nome")</script>';
-  altered.projects[0].title = '<img src=x onerror="alert(1)">';
-  const html = renderPortfolio(altered);
-  assert.ok(!html.includes('<script>'));
-  assert.ok(!html.includes('<img src=x'));
-  assert.ok(html.includes('&lt;script&gt;'));
-  assert.ok(html.includes('&lt;img'));
-});
-
-test('links externos não aceitam protocolos executáveis', () => {
-  const altered = structuredClone(profile);
-  altered.links.github = 'javascript:alert(1)';
-  assert.throws(() => renderPortfolio(altered), /URL/);
-});
-
-test('contato e evidências são links reais, sem ações vazias nem infraestrutura herdada', () => {
-  const html = renderPortfolio(profile);
-  assert.ok(html.includes(`mailto:${profile.email}`));
-  assert.ok(!/href="(?:#|)"/.test(html));
-  assert.ok(!/codedbywallace|wallacemv|websocket|placeholder|lorem ipsum/i.test(html));
-  assert.ok(!html.includes('<form'));
-  for (const [, attributes] of html.matchAll(/<a\s+([^>]+)>/g)) {
-    if (attributes.includes('target="_blank"')) assert.ok(attributes.includes('noopener noreferrer'));
-  }
-});
-
-test('a vitrine inclui os demais projetos verificados e identifica seus limites', () => {
-  const html = renderPortfolio(profile);
-  for (const repository of ['rag-sorveteria', 'Biblioteca_exame', 'Cart_Shop', '1986881_1999644_ADS2_turmaB_2024_player_POO', 'MiniPortif-lio', 'reactjs-fundamentos', 'docs', 'API-CONSOLE_C-']) {
-    assert.ok(profile.projects.some((project) => project.url === `https://github.com/Neitolas/${repository}`), repository);
-  }
-  assert.equal(new Set(profile.projects.map((project) => project.id)).size, profile.projects.length);
-  assert.ok(html.includes('data-filter="frontend"'));
-  assert.ok(html.includes('data-filter="estudos"'));
-  assert.ok(html.includes('Estrutura inicial'));
-  assert.ok(html.includes('Ana Karla de Souza Moretao'));
-  const rag = profile.projects.find((project) => project.id === 'rag');
-  assert.ok(rag.description.includes('contexto'));
-});
-
-test('o retrato da foto fornecida é texto acessível e já vem no HTML, sem depender de imagem ou JS no cliente', () => {
-  assert.ok(profile.portrait?.text, 'A foto fornecida precisa ser convertida em caracteres');
-  const lines = profile.portrait.text.split('\n');
-  assert.ok(profile.portrait.columns >= 140, 'O retrato precisa ter mais detalhes que a versão inicial');
-  assert.ok(lines.slice(0, Math.floor(lines.length / 2)).every((line) => /^\s{20}/.test(line) && /\s{20}$/.test(line)), 'O cenário ao redor do rosto precisa ficar vazio');
-  assert.equal(lines.length, profile.portrait.rows);
-  assert.ok(lines.every((line) => line.length === profile.portrait.columns));
-  assert.ok(new Set(profile.portrait.text.replace(/\s/g, '')).size >= 6, 'O retrato precisa preservar os tons da fotografia');
-  const html = renderPortfolio(profile);
   assert.ok(html.includes(escapeHtml(profile.portrait.text)));
-  assert.ok(html.includes('aria-label="Retrato de Nathan Nogueira Carrara em caracteres ASCII"'));
   assert.ok(html.includes('data-portrait aria-hidden="true"'));
-  assert.ok(!html.includes('class="monogram"'));
+  assert.ok(html.includes('aria-label="Retrato de Nathan Nogueira Carrara em caracteres ASCII"'));
+  assert.ok(!html.includes('RETRATO / NATHAN'));
+  for (const experience of profile.experiences) assert.ok(html.includes(experience.company));
+  for (const skill of profile.skills) assert.ok(html.includes(escapeHtml(skill.title)));
 });
 
-test('caracteres do retrato nunca são interpretados como HTML', () => {
-  const altered = structuredClone(profile);
-  altered.portrait = { columns: 110, rows: 1, text: '<img src=x onerror="alert(1)">' };
-  const html = renderPortfolio(altered);
-  assert.ok(html.includes('&lt;img src=x'));
-  assert.ok(!html.includes('<img src=x'));
+test('projetos são cartões completos em lista, com as onze fontes e os limites reais', () => {
+  const html = renderPortfolio(profile, 'projects');
+  assert.equal((html.match(/data-project=/g) || []).length, 11);
+  assert.ok(!html.includes('project-art'));
+  for (const project of profile.projects) {
+    assert.ok(html.includes(escapeHtml(project.title)));
+    assert.ok(html.includes(escapeHtml(project.url)));
+    assert.ok(html.includes(escapeHtml(project.note)));
+  }
+  assert.ok(html.includes('Ana Karla de Souza Moretao'));
+  assert.ok(html.includes('Estrutura inicial'));
+});
+
+test('sobre mantém as três experiências e formação sem atribuir títulos da referência', () => {
+  const html = renderPortfolio(profile, 'about');
+  for (const experience of profile.experiences) {
+    assert.ok(html.includes(escapeHtml(experience.role)));
+    assert.ok(html.includes(escapeHtml(experience.date)));
+  }
+  assert.ok(html.includes(profile.education.institution));
+  assert.ok(html.includes(profile.education.status));
+  assert.ok(!/Senior Java|15 anos/.test(html));
+});
+
+test('infra e paint têm conteúdo e ferramentas próprias, sem infraestrutura fictícia', () => {
+  const infra = renderPortfolio(profile, 'infra');
+  assert.ok(infra.includes('GitHub Actions'));
+  assert.ok(infra.includes('portfolio-nathan/actions'));
+  const paint = renderPortfolio(profile, 'paint');
+  assert.ok(paint.includes('data-paint-canvas'));
+  for (const control of ['Desfazer', 'Limpar', 'Baixar PNG']) assert.ok(paint.includes(control));
+});
+
+test('conteúdo e retrato são escapados em todas as páginas', () => {
+  const changed = structuredClone(profile);
+  changed.name = '<script>alert(1)</script>';
+  changed.projects[0].title = '<img src=x onerror=alert(1)>';
+  changed.portrait.text = '<img src=x onerror=alert(1)>';
+  for (const page of pages) {
+    const html = renderPortfolio(changed, page);
+    assert.ok(!html.includes('<script>'));
+    assert.ok(!html.includes('<img src=x'));
+  }
+});
+
+test('links externos validam protocolos e protegem a nova aba', () => {
+  const changed = structuredClone(profile);
+  changed.links.github = 'javascript:alert(1)';
+  assert.throws(() => renderPortfolio(changed), /URL/);
+  for (const page of pages) {
+    const html = renderPortfolio(profile, page);
+    for (const [, attrs] of html.matchAll(/<a\s+([^>]+)>/g)) {
+      if (attrs.includes('target="_blank"')) assert.ok(attrs.includes('noopener noreferrer'));
+    }
+  }
+});
+
+test('grade de caracteres preserva tons e deixa o cenário vazio', () => {
+  const lines = profile.portrait.text.split('\n');
+  assert.equal(lines.length, profile.portrait.rows);
+  assert.ok(lines.every(line => line.length === profile.portrait.columns));
+  assert.ok(new Set(profile.portrait.text.replace(/\s/g, '')).size >= 6);
+  assert.ok(lines.slice(0, Math.floor(lines.length / 2)).every(line => /^\s{20}/.test(line) && /\s{20}$/.test(line)));
 });

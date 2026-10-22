@@ -97,3 +97,16 @@ Atendendo à revisão visual do titular, o retrato passou para 160 × 88 caracte
 - O teste do retrato falhou com os dados antigos; após a geração, **7 testes passaram**, incluindo definição maior e cenário vazio nas laterais da metade superior.
 - Lint e build concluídos com exit 0. HTML de 45,11 kB, CSS de 18,27 kB e JS de 1,79 kB antes de gzip.
 - Chromium em 360, 768 e 1440 px passou, verificando preto puro sem gradiente, ausência das legendas removidas, retrato inteiro, filtros, teclado, âncoras e conteúdo sem JavaScript. Sem erros de página, requisições ausentes ou origens externas. Evidência atual em `evidencias/retrato-browser.json` e capturas atualizadas.
+
+## Revisão: reconstrução completa próxima da referência
+
+O pedido seguinte do titular substituiu o layout anterior por uma reconstrução das cinco telas da referência, com o conteúdo de Nathan. As seções anteriores são registros históricos. A evidência atual está em `evidencias/reconstrucao-browser.json`.
+
+- Observadas em navegador as telas Home, Projetos, Infra, Paint e Sobre da referência. Fonte Chakra Petch obtida separadamente no Google Fonts oficial, com licença SIL OFL 1.1 incluída. Nenhum código ou asset da referência foi reutilizado.
+- Os testes de aceitação inicialmente falharam pela ausência das cinco páginas, lista de projetos e ferramentas. Após implementação, **8 testes nativos passaram**, incluindo escape e validação de links. ESLint: exit 0. Build: exit 0, com cinco documentos completos. HTML de 8,78 a 33,06 kB, CSS de 16,12 kB e JS de 5,36 kB antes de gzip.
+- **Cinco páginas × 360, 768 e 1440 px:** sem rolagem horizontal; aba atual, navegação, contato por teclado/Escape e retorno de foco, lista dos onze projetos, filtros, detalhes e movimento reduzido passaram. Retrato inteiro, preto puro e contorno branco conferidos. Sem erros de página, recursos ausentes ou requisições externas.
+- Navegação entre Home, Projetos e Sobre, onze projetos, retrato e formação conferidos com JavaScript desativado. Paint avisa a necessidade de JavaScript; canais do rodapé continuam funcionais.
+- Build servido temporariamente em `/demo/` e cinco páginas abertas, navegadas e recarregadas com sucesso, incluindo assets/fontes relativos. O servidor temporário de QA foi encerrado; a prévia principal permanece disponível.
+- Paint: desenho por mouse e teclado, desfazer com igualdade dos pixels, download PNG, upload local e rejeição de arquivo inválido conferidos. Moldes vetoriais são próprios.
+- A revisão encontrou canvas pequeno em paisagem, contato acima da tela baixa, upload pendente substituindo ação posterior e mistura de dois ponteiros. Foram corrigidos. As regressões em 640 × 360/320, descarte e fechamento do bitmap antigo e dois dedos via eventos reais de toque no Chromium passaram.
+- Revisão de código concluída sem problemas relevantes remanescentes. Capturas de início, projetos, sobre, infra e paint em `evidencias/`. Não foram usados aparelhos físicos nem leitor de tela.

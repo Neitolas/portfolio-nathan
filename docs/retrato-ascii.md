@@ -22,6 +22,6 @@ Essa foi a forma executada nesta sessão, sem alterar a política de execução 
 
 O Vite insere os caracteres no HTML por `src/render.js`, escapando o conteúdo. Uma figura com nome acessível descreve o retrato de Nathan; o `pre` com milhares de caracteres tem `aria-hidden="true"` para evitar leitura individual dos símbolos. O retrato funciona com JavaScript desativado e não faz requisição de imagem nem consulta ao LinkedIn.
 
-O tamanho da fonte acompanha a largura do quadro. Os caracteres são claros sobre preto puro, sem gradiente, moldura ou legendas visíveis. A verificação de navegador confirma que o texto permanece inteiro em 360, 768 e 1440 px. Não há animação contínua; o modo de movimento reduzido mantém a mesma apresentação.
+O tamanho da fonte acompanha a largura do quadro. Os caracteres são claros sobre preto puro, com contorno branco e sem legendas visíveis. A verificação de navegador confirma que o texto permanece inteiro em 360, 768 e 1440 px. O retrato é estático; as animações de fundo e cursor do novo layout respeitam movimento reduzido.
 
 Fontes e autorização: `evidencias/retrato-fontes.json`. Resultados do navegador: `evidencias/retrato-browser.json`. Captura em celular: `evidencias/retrato-360.png`.

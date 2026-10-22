@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-22",
+  "browser": "Chromium via Playwright",
+  "scope": "Reconstrução completa baseada na observação visual da referência, com identidade de Nathan",
+  "general": {
+    "results": [
+      {
+        "width": 360,
+        "pages": 5,
+        "horizontalOverflow": false,
+        "navigation": true,
+        "contactKeyboard": true,
+        "whitePortraitBorder": true,
+        "projectFilters": true,
+        "projectList": true,
+        "reducedMotion": true
+      },
+      {
+        "width": 768,
+        "pages": 5,
+        "horizontalOverflow": false,
+        "navigation": true,
+        "contactKeyboard": true,
+        "whitePortraitBorder": true,
+        "projectFilters": true,
+        "projectList": true,
+        "reducedMotion": true
+      },
+      {
+        "width": 1440,
+        "pages": 5,
+        "horizontalOverflow": false,
+        "navigation": true,
+        "contactKeyboard": true,
+        "whitePortraitBorder": true,
+        "projectFilters": true,
+        "projectList": true,
+        "reducedMotion": true
+      }
+    ],
+    "projectCount": 11,
+    "paintDrawing": true,
+    "paintUndo": true,
+    "paintKeyboard": true,
+    "paintDownload": true,
+    "noJavaScriptNavigation": true,
+    "pageErrors": [],
+    "failedRequests": [],
+    "requestOrigins": [
+      "http://127.0.0.1:4173"
+    ]
+  },
+  "paintRegression": {
+    "landscapeCanvas": true,
+    "shortViewportContact": true,
+    "staleUploadDiscarded": true,
+    "staleBitmapClosed": true,
+    "multiTouchIsolation": true
+  },
+  "subpath": {
+    "subpath": "/demo/",
+    "pages": 5,
+    "reload": true,
+    "missingResources": []
+  },
+  "additionalPaintChecks": {
+    "localImageUpload": true,
+    "invalidFileRejected": true
+  },
+  "nativeTests": 8,
+  "lintExitCode": 0,
+  "buildExitCode": 0
+}

@@ -36,6 +36,8 @@ SHAs das fontes consultadas estão em `evidencias/fontes.json`. Repositórios pr
 
 ## Ampliação do catálogo e pedido de retrato
 
+A revisão seguinte substituiu a apresentação inicial pela estrutura visual observada nas cinco telas da referência, conforme novo pedido explícito do titular. O conteúdo profissional e os projetos desta tabela permanecem os de Nathan. A fonte Chakra Petch foi obtida separadamente no Google Fonts com licença OFL; nenhum arquivo da referência foi reutilizado. Infra descreve apenas o repositório/CI real do portfólio. Evidência atual: `evidencias/reconstrucao-browser.json`.
+
 Em 22/10/2026, nova consulta encontrou 15 repositórios públicos e ampliou a vitrine de 3 para **11 projetos e estudos**. README e código dos oito itens adicionais foram lidos. Escopos e links estão em `catalogo-projetos.md`; SHAs em `evidencias/catalogo-fontes.json`.
 
 - **Verificada agora:** implementação de RAG, biblioteca Python, carrinho PHP, Player POO, miniportfólio Vue, exercícios React, gerenciador de usuários PHP e estrutura inicial ASP.NET Core, cada qual com as limitações identificadas no catálogo.

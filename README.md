@@ -2,9 +2,9 @@
 
 [![Validar portfólio](https://github.com/Neitolas/portfolio-nathan/actions/workflows/ci.yml/badge.svg)](https://github.com/Neitolas/portfolio-nathan/actions/workflows/ci.yml)
 
-Portfólio pessoal com projetos, experiência, formação e contato. Interface autoral em grafite e índigo, com conteúdo rastreável às fontes públicas e ao briefing fornecido.
+Portfólio pessoal com **11 projetos e estudos**, experiência, formação e contato. Interface autoral em grafite e índigo, com conteúdo rastreável às fontes públicas e ao briefing fornecido.
 
-![Prévia do portfólio](docs/evidencias/viewport-1440.png)
+![Início do portfólio](docs/evidencias/inicio-1440.png)
 
 ## Executar no Windows
 
@@ -54,12 +54,15 @@ Os textos principais são gerados no HTML pelo Vite. Identidade, projetos, naveg
 ## Fontes e validação
 
 - [Fontes do perfil e pendências](docs/fontes-perfil.md)
+- [Catálogo de projetos e escopo verificado](docs/catalogo-projetos.md)
 - [Decisões visuais e técnicas](docs/decisoes.md)
 - [Comandos e resultados de validação](docs/validacao.md)
 - [Captura em celular](docs/evidencias/viewport-360.png) e [tablet](docs/evidencias/viewport-768.png)
 - [Opções gratuitas de hospedagem](docs/hospedagem.md)
 
 O LinkedIn não pôde ser lido nesta execução. O link do briefing foi preservado e sua divergência com o GitHub está registrada nas fontes. Datas e vínculos atuais devem ser confirmados antes de atualizar o conteúdo como atual. Nenhuma experiência, imagem ou infraestrutura da referência foi atribuída a Nathan.
+
+O retrato ASCII com a foto do LinkedIn foi solicitado na revisão, mas o LinkedIn direcionou para uma tela de cadastro. A foto correta permanece pendente de fornecimento pelo titular; o site mantém o monograma até recebê-la.
 
 ## Versionamento e publicação
 

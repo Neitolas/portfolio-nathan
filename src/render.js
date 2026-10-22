@@ -19,7 +19,8 @@ function tags(items) {
   return `<ul class="tags">${items.map((item) => `<li>${e(item)}</li>`).join('')}</ul>`;
 }
 
-function projectArt(project) {
+function projectArt(project, index) {
+  const number = String(index + 1).padStart(2, '0');
   if (project.id === 'fenix') {
     return `<div class="project-art fenix-art" aria-hidden="true">
       <div class="art-topline"><span>F.E.N.I.X. / ARQUITETURA</span><span>01 — 03</span></div>
@@ -29,19 +30,21 @@ function projectArt(project) {
     </div>`;
   }
   if (project.id === 'api') {
-    return `<div class="project-art api-art" aria-hidden="true"><div class="art-topline"><span>HTTP / JSON</span><span>02</span></div>
+    return `<div class="project-art api-art" aria-hidden="true"><div class="art-topline"><span>HTTP / JSON</span><span>${number}</span></div>
       <div class="endpoint"><span>GET</span><code>/api/</code><b>↗</b></div>
       <div class="code-lines"><span>{</span><span>&nbsp; "user_nickname": <b>"nathan"</b>,</span><span>&nbsp; "user_name": <b>"Nathan"</b></span><span>}</span></div>
       <div class="art-bottomline"><span>CRIAR · CONSULTAR · ATUALIZAR · EXCLUIR</span></div></div>`;
   }
-  return `<div class="project-art parking-art" aria-hidden="true"><div class="art-topline"><span>REGRAS / PERSISTÊNCIA</span><span>03</span></div>
+  if (project.id === 'estacionamento') return `<div class="project-art parking-art" aria-hidden="true"><div class="art-topline"><span>REGRAS / PERSISTÊNCIA</span><span>${number}</span></div>
     <div class="parking-symbol">P<span>↗</span></div><div class="parking-flow"><span>Entrada</span><i></i><span>Permanência</span><i></i><span>Saída</span></div>
     <div class="art-bottomline"><span>UMA REGRA PARA CADA TIPO DE VEÍCULO.</span></div></div>`;
+  const visual = project.visual ?? { mark: '</>', label: project.categoryLabel, steps: project.technologies.slice(0, 3), tone: 'blue' };
+  return `<div class="project-art catalog-art tone-${e(visual.tone)}" aria-hidden="true"><div class="art-topline"><span>${e(visual.label)}</span><span>${number}</span></div><div class="catalog-mark">${e(visual.mark)}<span>↗</span></div><div class="catalog-flow">${visual.steps.map((step) => `<span>${e(step)}</span>`).join('<i>→</i>')}</div><div class="art-bottomline"><span>${e(project.categoryLabel.toUpperCase())} / CÓDIGO PÚBLICO</span></div></div>`;
 }
 
 function projectCard(project, index) {
   return `<article class="project-card ${index === 0 ? 'featured' : ''}" data-project="${e(project.category)}" aria-labelledby="project-${e(project.id)}">
-    ${projectArt(project)}
+    ${projectArt(project, index)}
     <div class="project-copy"><div class="project-context"><span>${e(project.context)}</span><span>${e(project.categoryLabel)}</span></div>
     <h3 id="project-${e(project.id)}">${e(project.title)}</h3><p class="project-subtitle">${e(project.subtitle)}</p>
     <p>${e(project.description)}</p>${tags(project.technologies)}
@@ -73,8 +76,8 @@ export function renderPortfolio(profile) {
     </div>
     <div class="hero-baseline"><span>CÓDIGO, CONTEXTO E SOLUÇÃO.</span><a href="#projetos">Explore meu trabalho ${down}</a></div></section>
 
-    <section id="projetos" class="section container" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-index">01 / PROJETOS</p><h2 id="projects-title">Da ideia ao<br><span>código que funciona.</span></h2></div><p>Uma seleção de projetos para conhecer<br class="desktop-break"> meu jeito de construir soluções.</p></div>
-      <div class="project-toolbar"><span class="small-label">TRABALHOS SELECIONADOS</span><div class="filters" data-filters role="group" aria-label="Filtrar projetos" hidden><button type="button" data-filter="all" aria-pressed="true">Todos</button><button type="button" data-filter="fullstack" aria-pressed="false">Full Stack</button><button type="button" data-filter="backend" aria-pressed="false">Backend</button></div></div>
+    <section id="projetos" class="section container" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-index">01 / PROJETOS</p><h2 id="projects-title">Da ideia ao<br><span>código que funciona.</span></h2></div><p>Projetos, estudos e experimentos para conhecer<br class="desktop-break"> meu jeito de construir soluções.</p></div>
+      <div class="project-toolbar"><span class="small-label">${profile.projects.length} PROJETOS E ESTUDOS</span><div class="filters" data-filters role="group" aria-label="Filtrar projetos" hidden><button type="button" data-filter="all" aria-pressed="true">Todos</button>${[...new Map(profile.projects.map((project) => [project.category, project.categoryLabel]))].map(([category, label]) => `<button type="button" data-filter="${e(category)}" aria-pressed="false">${e(label)}</button>`).join('')}</div></div>
       <p class="visually-hidden" data-filter-status role="status" aria-live="polite"></p>
       <div class="project-grid">${profile.projects.map(projectCard).join('')}</div>
       <div class="section-end"><span>Mais código, estudos e experimentos.</span>${link(profile.links.github, 'Explorar meu GitHub', 'text-link')}</div>

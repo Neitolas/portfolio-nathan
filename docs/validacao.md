@@ -64,3 +64,14 @@ Os JSON brutos imutáveis foram preservados localmente e excluídos do Git públ
 - Publicação do **código público no GitHub** autorizada após a prévia local. A hospedagem do site ainda depende da escolha do provedor; o CI incluído valida código e não faz deploy.
 - Repositório criado via API autenticada: [Neitolas/portfolio-nathan](https://github.com/Neitolas/portfolio-nathan), resposta `private: false`, branch padrão `main`. As próximas execuções de CI ficam disponíveis na [página de Actions](https://github.com/Neitolas/portfolio-nathan/actions).
 - O pacote REA original não foi modificado; seus testes de instalação Windows/Linux não fazem parte da validação deste novo site.
+
+## Revisão: catálogo ampliado
+
+Em 22/10/2026, a vitrine passou de três para **11 projetos e estudos**. Os resultados anteriores descrevem a primeira versão; os resultados abaixo correspondem à ampliação.
+
+- Novo teste de aceitação falhou inicialmente porque o RAG e os demais repositórios ainda não estavam no catálogo. Após a implementação, **5 testes nativos passaram**, incluindo os quatro anteriores.
+- `node node_modules/eslint/bin/eslint.js .` e `node node_modules/vite/bin/vite.js build`: exit 0. Build observado: HTML de 35,53 kB, CSS de 22,71 kB e JS de 1,79 kB antes de gzip.
+- Roteiro Playwright atualizado para conferir todas as categorias e calcular expectativas a partir do catálogo inicial. **360, 768 e 1440 px passaram**, incluindo 11 projetos, filtros, contagem acessível, teclado, âncoras, movimento reduzido e conteúdo sem JS. Sem rolagem horizontal, erros de página, recursos ausentes ou requisições externas no contexto de QA.
+- A primeira execução do roteiro na aba usada para consultar o LinkedIn capturou um beacon de saída do LinkedIn. A investigação de rede identificou o evento fora do site. O roteiro passou a criar e encerrar seu próprio contexto de navegador; a execução isolada passou sem filtrar ou ignorar requisições do portfólio.
+- Os projetos de origem foram inspecionados em código e documentação. Não há afirmação de que todos foram executados ou de que estão prontos para produção.
+- **Retrato ASCII pendente:** as duas URLs LinkedIn exigiram cadastro e não entregaram a foto. O titular foi solicitado a fornecer a imagem ou um arquivo local; não foi usado um rosto de outra fonte.

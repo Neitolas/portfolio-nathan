@@ -1,0 +1,155 @@
+{
+  "consultedAt": "2026-10-22",
+  "publicRepositoriesFound": 15,
+  "portfolioProjects": 11,
+  "additionalProjects": [
+    {
+      "repository": "Neitolas/rag-sorveteria",
+      "visibility": "public",
+      "treeSha": "7f8e8597953ff0ae92e6284954756f2bb361643d",
+      "sources": [
+        {
+          "path": "README.md",
+          "sha": "c35370a11d604f585d7cb4000f1f1c1da85101e9",
+          "url": "https://github.com/Neitolas/rag-sorveteria/blob/main/README.md"
+        },
+        {
+          "path": "backend/rag/chat.py",
+          "sha": "d9a5da87609fbf547a67cf2dc53845248728a326",
+          "url": "https://github.com/Neitolas/rag-sorveteria/blob/main/backend/rag/chat.py"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/API-CONSOLE_C-",
+      "visibility": "public",
+      "treeSha": "1fab54ec6047c94a4e74867fb9ee88c6ef217ed2",
+      "sources": [
+        {
+          "path": "Program.cs",
+          "sha": "97ef782c6b81a894c7995f333ced159e34e484a6",
+          "url": "https://github.com/Neitolas/API-CONSOLE_C-/blob/main/Program.cs"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/Biblioteca_exame",
+      "visibility": "public",
+      "treeSha": "b32e5d9ecbd0a6ba1a4d03b6d52c45741cabc002",
+      "sources": [
+        {
+          "path": "README.md",
+          "sha": "b19df2d60f6dff8fb70db6b7e792090d80d6bbe9",
+          "url": "https://github.com/Neitolas/Biblioteca_exame/blob/main/README.md"
+        },
+        {
+          "path": "trabalho.py",
+          "sha": "0c60389b18437933b53274c9ed1111efacc88d29",
+          "url": "https://github.com/Neitolas/Biblioteca_exame/blob/main/trabalho.py"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/MiniPortif-lio",
+      "visibility": "public",
+      "treeSha": "63e3732692212523724c7833d1ebd8525badaa51",
+      "sources": [
+        {
+          "path": "portifolio/src/App.vue",
+          "sha": "ad5212e7990b8acef358dbe9c85cb3c54e0a20e8",
+          "url": "https://github.com/Neitolas/MiniPortif-lio/blob/main/portifolio/src/App.vue"
+        },
+        {
+          "path": "portifolio/src/views/HomeView.vue",
+          "sha": "bf1e71022f49ff0b2a6081a1c448e2afa2e59504",
+          "url": "https://github.com/Neitolas/MiniPortif-lio/blob/main/portifolio/src/views/HomeView.vue"
+        },
+        {
+          "path": "portifolio/package.json",
+          "sha": "1adb7b5ea890920f8327eb049339299bb0ea1fa2",
+          "url": "https://github.com/Neitolas/MiniPortif-lio/blob/main/portifolio/package.json"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/Cart_Shop",
+      "visibility": "public",
+      "treeSha": "431b39a4ce3e8e5d50353814b0a3d53112b2465c",
+      "sources": [
+        {
+          "path": "src/Cart.php",
+          "sha": "65a1e304b85a1e66c625a34f9d9e77f90b852854",
+          "url": "https://github.com/Neitolas/Cart_Shop/blob/main/src/Cart.php"
+        },
+        {
+          "path": "src/Product.php",
+          "sha": "f0fcc4739195ae91dc8ca4edc367a10bfef6aa07",
+          "url": "https://github.com/Neitolas/Cart_Shop/blob/main/src/Product.php"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/1986881_1999644_ADS2_turmaB_2024_player_POO",
+      "visibility": "public",
+      "treeSha": "f8408b30c2d95ad22b72b989db387f9b8c8d100c",
+      "sources": [
+        {
+          "path": "README.md",
+          "sha": "e7eb54cea3ce6a833ad724f7ab0a949bf09185f3",
+          "url": "https://github.com/Neitolas/1986881_1999644_ADS2_turmaB_2024_player_POO/blob/main/README.md"
+        },
+        {
+          "path": "Classes/Player.php",
+          "sha": "f38b8001478c6e6ec74f5c6323e32a6316e4d18a",
+          "url": "https://github.com/Neitolas/1986881_1999644_ADS2_turmaB_2024_player_POO/blob/main/Classes/Player.php"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/reactjs-fundamentos",
+      "visibility": "public",
+      "treeSha": "2ae4cc2ace4cd4d37128c4e414340bb0defe5782",
+      "sources": [
+        {
+          "path": "README.md",
+          "sha": "6b0d041e210cb763327d2200e15b026df6c1c563",
+          "url": "https://github.com/Neitolas/reactjs-fundamentos/blob/master/README.md"
+        },
+        {
+          "path": "4-calculadora.html",
+          "sha": "807f360655cf4aeb61e9ed53c65a55df40c27759",
+          "url": "https://github.com/Neitolas/reactjs-fundamentos/blob/master/4-calculadora.html"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    },
+    {
+      "repository": "Neitolas/docs",
+      "visibility": "public",
+      "treeSha": "2a7eccd9836f520ca18130e4d25b52c9b572d12a",
+      "sources": [
+        {
+          "path": "src/UserManager.php",
+          "sha": "4a55c8d971d1a3f2cf0d360ddc68960877a0cdf5",
+          "url": "https://github.com/Neitolas/docs/blob/master/src/UserManager.php"
+        }
+      ],
+      "status": "Código e documentação consultados; projeto de origem não executado nesta revisão."
+    }
+  ],
+  "portrait": {
+    "requestedSource": "LinkedIn do titular",
+    "attemptedProfiles": [
+      "https://www.linkedin.com/in/devnathannogueiracarrara/",
+      "https://www.linkedin.com/in/nathan-nogueira-carrara/"
+    ],
+    "browserResult": "Ambas as URLs redirecionaram para /authwall (cadastro). Foto não obtida.",
+    "status": "Aguardando imagem fornecida pelo titular; nenhuma imagem de outra pessoa ou de outra fonte substituiu a foto."
+  }
+}

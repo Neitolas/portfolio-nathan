@@ -1,0 +1,42 @@
+{
+  "results": [
+    {
+      "width": 360,
+      "horizontalOverflow": false,
+      "projectFilters": true,
+      "keyboardDetails": true,
+      "anchors": true,
+      "reducedMotion": true,
+      "mobileMenu": true
+    },
+    {
+      "width": 768,
+      "horizontalOverflow": false,
+      "projectFilters": true,
+      "keyboardDetails": true,
+      "anchors": true,
+      "reducedMotion": true,
+      "mobileMenu": "não aplicável"
+    },
+    {
+      "width": 1440,
+      "horizontalOverflow": false,
+      "projectFilters": true,
+      "keyboardDetails": true,
+      "anchors": true,
+      "reducedMotion": true,
+      "mobileMenu": "não aplicável"
+    }
+  ],
+  "projectCount": 11,
+  "noJavaScript": true,
+  "pageErrors": [],
+  "failedRequests": [],
+  "requestOrigins": [
+    "http://127.0.0.1:4173"
+  ],
+  "date": "2026-10-22",
+  "browser": "Chromium via Playwright",
+  "scope": "Catálogo ampliado para 11 projetos e estudos",
+  "portrait": "Pendente de foto: LinkedIn redirecionou para cadastro"
+}

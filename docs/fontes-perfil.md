@@ -33,3 +33,13 @@ Consulta: **22/10/2026**, horário de referência America/Sao_Paulo. “Verifica
 - Informar destino de hospedagem e domínio próprios para configurar canonical, `og:url` e uma imagem social com URL absoluta.
 
 SHAs das fontes consultadas estão em `evidencias/fontes.json`. Repositórios privados não foram lidos para compor o conteúdo público. Nenhum arquivo do projeto corporativo foi baixado.
+
+## Ampliação do catálogo e pedido de retrato
+
+Em 22/10/2026, nova consulta encontrou 15 repositórios públicos e ampliou a vitrine de 3 para **11 projetos e estudos**. README e código dos oito itens adicionais foram lidos. Escopos e links estão em `catalogo-projetos.md`; SHAs em `evidencias/catalogo-fontes.json`.
+
+- **Verificada agora:** implementação de RAG, biblioteca Python, carrinho PHP, Player POO, miniportfólio Vue, exercícios React, gerenciador de usuários PHP e estrutura inicial ASP.NET Core, cada qual com as limitações identificadas no catálogo.
+- **Verificada agora:** README do Player POO identifica Nathan e Ana Karla de Souza Moretao; a colaboração foi preservada.
+- **Conflito histórico:** HomeView do miniportfólio anterior informa início de formação em 2023; briefing menciona 2024. Nenhuma dessas datas foi publicada como início confirmado da formação atual.
+- **Informada pelo usuário:** usar sua própria foto do LinkedIn para um retrato ASCII.
+- **Pendente:** foto. Ambas as URLs LinkedIn, tentadas também em navegador, redirecionaram para `/authwall`, sem acesso à imagem. Nenhum retrato foi extraído ou substituído por foto de outra fonte.

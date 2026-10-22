@@ -47,3 +47,17 @@ test('contato e evidências são links reais, sem ações vazias nem infraestrut
     if (attributes.includes('target="_blank"')) assert.ok(attributes.includes('noopener noreferrer'));
   }
 });
+
+test('a vitrine inclui os demais projetos verificados e identifica seus limites', () => {
+  const html = renderPortfolio(profile);
+  for (const repository of ['rag-sorveteria', 'Biblioteca_exame', 'Cart_Shop', '1986881_1999644_ADS2_turmaB_2024_player_POO', 'MiniPortif-lio', 'reactjs-fundamentos', 'docs', 'API-CONSOLE_C-']) {
+    assert.ok(profile.projects.some((project) => project.url === `https://github.com/Neitolas/${repository}`), repository);
+  }
+  assert.equal(new Set(profile.projects.map((project) => project.id)).size, profile.projects.length);
+  assert.ok(html.includes('data-filter="frontend"'));
+  assert.ok(html.includes('data-filter="estudos"'));
+  assert.ok(html.includes('Estrutura inicial'));
+  assert.ok(html.includes('Ana Karla de Souza Moretao'));
+  const rag = profile.projects.find((project) => project.id === 'rag');
+  assert.ok(rag.description.includes('contexto'));
+});

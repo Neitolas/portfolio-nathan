@@ -11,3 +11,5 @@
 - **Publicação:** assets relativos (`base: './'`) e âncoras independentes da hospedagem. Domínio, canonical, `og:url` e imagem social absoluta aguardam destino real. O build é estático; `vite preview` serve apenas à validação local.
 - **Licença:** nenhum código ou asset do repositório de referência foi reutilizado; a consulta a `LICENSE` na raiz não estabeleceu autorização de reutilização.
 - **Ambiente:** Node 24.20.0 e npm 11.19.0 no Windows. Sem WSL, Docker ou mudanças de sistema. `npm.cmd` ficou pendente no wrapper desta sessão; quando necessário, foi usada a CLI npm oficial via `node.exe`.
+- **Catálogo ampliado:** 11 projetos e estudos, com categorias derivadas dos dados, rótulos de estágio real e painéis próprios. A arte de estacionamento ficou restrita ao cartão correspondente; os demais usam conteúdo visual do próprio projeto.
+- **Retrato solicitado:** o efeito ASCII será baseado na foto correta do titular. A foto LinkedIn está bloqueada por cadastro e não foi obtida; o monograma é mantido enquanto essa entrada estiver ausente.

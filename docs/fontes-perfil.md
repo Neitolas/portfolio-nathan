@@ -42,4 +42,4 @@ Em 22/10/2026, nova consulta encontrou 15 repositórios públicos e ampliou a vi
 - **Verificada agora:** README do Player POO identifica Nathan e Ana Karla de Souza Moretao; a colaboração foi preservada.
 - **Conflito histórico:** HomeView do miniportfólio anterior informa início de formação em 2023; briefing menciona 2024. Nenhuma dessas datas foi publicada como início confirmado da formação atual.
 - **Informada pelo usuário:** usar sua própria foto do LinkedIn para um retrato ASCII.
-- **Pendente:** foto. Ambas as URLs LinkedIn, tentadas também em navegador, redirecionaram para `/authwall`, sem acesso à imagem. Nenhum retrato foi extraído ou substituído por foto de outra fonte.
+- **Resolvido por fornecimento do usuário:** após ambas as URLs LinkedIn redirecionarem para `/authwall`, o titular anexou `1708200412422.jpg` e disse para usá-la. O arquivo foi visualizado e convertido em caracteres ASCII. Foto e autorização são informações fornecidas nesta sessão; não há alegação de obtenção da imagem no LinkedIn. Hash da origem em `evidencias/retrato-fontes.json`.

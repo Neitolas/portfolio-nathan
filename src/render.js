@@ -69,11 +69,10 @@ export function renderPortfolio(profile) {
       <div class="hero-actions"><a class="button button-primary" href="#projetos">Ver projetos ${down}</a><a class="button button-quiet" href="#contato">Vamos conversar ${arrow}</a></div>
       <div class="hero-socials">${link(profile.links.github, 'GitHub', 'text-link')}${link(profile.links.linkedin, 'LinkedIn', 'text-link')}<span>BACKEND · APIS · DADOS</span></div>
     </div>
-    <div class="identity-art" aria-hidden="true"><div class="identity-top"><span>DESENVOLVIMENTO / CONEXÕES</span><span>BR</span></div>
-      <div class="identity-orbit orbit-one"></div><div class="identity-orbit orbit-two"></div><span class="cross cross-one">+</span><span class="cross cross-two">+</span>
-      <div class="monogram">N<span>N</span><i>.</i></div><span class="orbit-label label-front">&lt;interface /&gt;</span><span class="orbit-label label-api">{ API }</span><span class="orbit-label label-data">[ dados ]</span>
-      <div class="identity-bottom"><span>DA INTERFACE À REGRA DE NEGÓCIO.</span><span>↗</span></div>
-    </div>
+    <figure class="portrait-frame" role="img" aria-label="Retrato de ${e(profile.name)} em caracteres ASCII"><div class="identity-top" aria-hidden="true"><span>RETRATO / NATHAN</span><span>ASCII</span></div>
+      <pre class="ascii-portrait" data-portrait aria-hidden="true" style="--portrait-columns:${e(profile.portrait.columns)}">${e(profile.portrait.text)}</pre>
+      <figcaption class="identity-bottom" aria-hidden="true"><span>DA IMAGEM AO CÓDIGO.</span><span>↗</span></figcaption>
+    </figure>
     <div class="hero-baseline"><span>CÓDIGO, CONTEXTO E SOLUÇÃO.</span><a href="#projetos">Explore meu trabalho ${down}</a></div></section>
 
     <section id="projetos" class="section container" aria-labelledby="projects-title"><div class="section-heading"><div><p class="eyebrow section-index">01 / PROJETOS</p><h2 id="projects-title">Da ideia ao<br><span>código que funciona.</span></h2></div><p>Projetos, estudos e experimentos para conhecer<br class="desktop-break"> meu jeito de construir soluções.</p></div>

@@ -26,4 +26,4 @@ SHAs e links dos oito projetos acrescentados estão em `evidencias/catalogo-font
 
 ## Retrato em texto solicitado
 
-A referência usa uma imagem convertida em caracteres segundo a luminosidade. Nesta revisão, o usuário pediu usar a própria foto do LinkedIn para esse efeito. As duas URLs conhecidas do perfil redirecionaram para a tela de cadastro no navegador; a foto não foi obtida. A conversão está pendente de uma imagem fornecida pelo titular. O monograma permanece até haver a foto correta, sem inventar um rosto ou substituir por uma imagem de outra fonte.
+A referência usa uma imagem convertida em caracteres segundo a luminosidade. As duas URLs conhecidas do LinkedIn exigiram cadastro; em seguida o titular forneceu diretamente `1708200412422.jpg` e autorizou seu uso. Essa foto foi convertida em uma grade de 110 colunas por 61 linhas e o retrato em texto substituiu o monograma. A origem e a geração estão em `retrato-ascii.md`; a imagem não foi extraída do LinkedIn.

@@ -256,16 +256,34 @@ button:focus-visible,a:focus-visible,summary:focus-visible {
   letter-spacing:.06em;
   margin-left:auto
 }
-.identity-art {
+.portrait-frame {
   position:relative;
   isolation:isolate;
-  aspect-ratio:1/.99;
+  container-type:inline-size;
+  aspect-ratio:1/1.05;
+  width:100%;
+  margin:0;
   min-width:0;
-  background:radial-gradient(ellipse at 50% 50%,#28243f7a,transparent 65%),linear-gradient(#25243380 1px,transparent 1px),linear-gradient(90deg,#25243380 1px,transparent 1px);
-  background-size:auto,40px 40px,40px 40px;
+  background:radial-gradient(ellipse at 50% 45%,#222033,#15141d 75%);
   border:1px solid #34313f;
   overflow:hidden;
   border-radius:8px
+}
+.ascii-portrait {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  color:#d9d5f0;
+  font-family:'Courier New',monospace;
+  font-size:calc((100cqi - 48px) / (var(--portrait-columns) * 0.6));
+  font-weight:400;
+  font-variant-ligatures:none;
+  line-height:1;
+  letter-spacing:0;
+  white-space:pre;
 }
 .identity-top,.identity-bottom {
   position:absolute;
@@ -279,91 +297,15 @@ button:focus-visible,a:focus-visible,summary:focus-visible {
   color:#aaa4bd
 }
 .identity-top {
-  top:23px
+  top:18px
 }
 .identity-bottom {
-  bottom:23px
+  bottom:16px
 }
 .identity-bottom>span:last-child {
-  font-size:24px;
-  color:#bbb6e0
-}
-.identity-orbit {
-  position:absolute;
-  border:1px solid #6e659345;
-  border-radius:50%;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) rotate(-35deg)
-}
-.orbit-one {
-  width:85%;
-  height:52%
-}
-.orbit-two {
-  width:70%;
-  height:85%
-}
-.monogram {
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:clamp(100px,13vw,178px);
-  font-weight:700;
-  letter-spacing:-.15em;
+  font-size:16px;
   line-height:1;
-  transform:translateX(-12px);
-  color:#d4d0f3
-}
-.monogram>span {
-  color:transparent;
-  -webkit-text-stroke:1px #9189c6;
-  position:relative;
-  left:-10px
-}
-.monogram>i {
-  font-style:normal;
-  color:var(--blue);
-  font-size:80px;
-  margin-left:10px;
-  align-self:center;
-  transform:translateY(42px)
-}
-.orbit-label {
-  position:absolute;
-  font:10px var(--mono);
-  color:#c2bbdf;
-  background:#171620;
-  border:1px solid #484058;
-  padding:8px 11px;
-  border-radius:3px
-}
-.label-front {
-  top:23%;
-  left:10%
-}
-.label-api {
-  right:7%;
-  top:45%
-}
-.label-data {
-  bottom:18%;
-  left:25%
-}
-.cross {
-  position:absolute;
-  font:18px var(--mono);
-  color:#8f87b1
-}
-.cross-one {
-  left:25px;
-  top:42%
-}
-.cross-two {
-  right:26%;
-  bottom:22%
+  color:#bbb6e0
 }
 .hero-baseline {
   grid-column:1/-1;
@@ -1079,9 +1021,6 @@ details[open] summary>span {
     max-width:180px;
     line-height:1.6
   }
-  .monogram {
-    font-size:142px
-  }
   .hero-actions {
     gap:4px
   }
@@ -1132,34 +1071,12 @@ details[open] summary>span {
     font-size:12px;
     min-height:46px
   }
-  .identity-art {
-    aspect-ratio:1/1.22
-  }
-  .monogram {
-    font-size:112px
-  }
-  .monogram i {
-    font-size:54px;
-    transform:translateY(28px)
-  }
-  .orbit-label {
-    font-size:8px;
-    padding:6px 8px
-  }
   .identity-top {
     font-size:7px;
     line-height:1.5
   }
   .identity-top>span:first-child {
     max-width:120px
-  }
-  .label-api {
-    right:5%;
-    top:53%
-  }
-  .label-data {
-    left:15%;
-    bottom:18%
   }
   .section {
     padding-block:75px
@@ -1339,11 +1256,6 @@ details[open] summary>span {
     display:block;
     font-size:8px
   }
-  .identity-art {
-    width:100%;
-    aspect-ratio:1.55;
-    max-height:340px
-  }
   .identity-top,.identity-bottom {
     left:20px;
     right:20px;
@@ -1354,36 +1266,6 @@ details[open] summary>span {
   }
   .identity-bottom>span:first-child {
     max-width:none
-  }
-  .monogram {
-    font-size:140px
-  }
-  .monogram i {
-    font-size:64px;
-    transform:translateY(34px)
-  }
-  .orbit-one {
-    width:67%;
-    height:58%
-  }
-  .orbit-two {
-    width:50%;
-    height:90%
-  }
-  .orbit-label {
-    font-size:9px
-  }
-  .label-front {
-    top:25%;
-    left:12%
-  }
-  .label-api {
-    top:43%;
-    right:12%
-  }
-  .label-data {
-    bottom:19%;
-    left:24%
   }
   .hero-baseline {
     margin-top:0;
@@ -1587,12 +1469,6 @@ details[open] summary>span {
   .hero-actions .button {
     padding-inline:13px;
     gap:12px
-  }
-  .identity-art {
-    aspect-ratio:1.3
-  }
-  .monogram {
-    font-size:130px
   }
   .identity-bottom>span:first-child {
     font-size:7px

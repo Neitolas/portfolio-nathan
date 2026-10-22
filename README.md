@@ -42,6 +42,8 @@ node.exe $portfolioNpmCli run dev
 | --- | --- |
 | `src/content.js` | Identidade, links, experiências, formação, competências e projetos |
 | `src/render.js` | HTML semântico, escape de conteúdo e validação de protocolos |
+| `src/portrait.js` | Retrato ASCII gerado a partir da foto fornecida pelo titular |
+| `scripts/Gerar-Retrato.ps1` | Gerador local de caracteres com System.Drawing no Windows |
 | `src/main.js` | Menu móvel e filtros acessíveis |
 | `src/style.css` | Identidade visual, layout responsivo e movimento reduzido |
 | `vite.config.js` | HTML completo no desenvolvimento/build e assets relativos |
@@ -55,6 +57,7 @@ Os textos principais são gerados no HTML pelo Vite. Identidade, projetos, naveg
 
 - [Fontes do perfil e pendências](docs/fontes-perfil.md)
 - [Catálogo de projetos e escopo verificado](docs/catalogo-projetos.md)
+- [Origem e geração do retrato ASCII](docs/retrato-ascii.md)
 - [Decisões visuais e técnicas](docs/decisoes.md)
 - [Comandos e resultados de validação](docs/validacao.md)
 - [Captura em celular](docs/evidencias/viewport-360.png) e [tablet](docs/evidencias/viewport-768.png)
@@ -62,7 +65,7 @@ Os textos principais são gerados no HTML pelo Vite. Identidade, projetos, naveg
 
 O LinkedIn não pôde ser lido nesta execução. O link do briefing foi preservado e sua divergência com o GitHub está registrada nas fontes. Datas e vínculos atuais devem ser confirmados antes de atualizar o conteúdo como atual. Nenhuma experiência, imagem ou infraestrutura da referência foi atribuída a Nathan.
 
-O retrato ASCII com a foto do LinkedIn foi solicitado na revisão, mas o LinkedIn direcionou para uma tela de cadastro. A foto correta permanece pendente de fornecimento pelo titular; o site mantém o monograma até recebê-la.
+O retrato ASCII foi criado com a foto fornecida diretamente pelo titular nesta conversa e substitui o monograma. Seus caracteres já estão no HTML e aparecem sem JavaScript. A fotografia original não é necessária para executar o site; a origem não é apresentada como uma extração do LinkedIn.
 
 ## Versionamento e publicação
 

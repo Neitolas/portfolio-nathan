@@ -1,7 +1,10 @@
+import { portrait } from './portrait.js';
+
 export const profile = {
   name: 'Nathan Nogueira Carrara',
   firstName: 'Nathan',
   lastName: 'Nogueira Carrara',
+  portrait,
   role: 'Desenvolvedor Full Stack Júnior',
   description: 'Desenvolvo aplicações web, APIs e integrações. Meu foco é conectar interfaces, regras de negócio e dados para resolver problemas reais.',
   email: 'nathancarraranogueira@gmail.com',

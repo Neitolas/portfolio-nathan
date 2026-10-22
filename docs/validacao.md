@@ -75,3 +75,16 @@ Em 22/10/2026, a vitrine passou de três para **11 projetos e estudos**. Os resu
 - A primeira execução do roteiro na aba usada para consultar o LinkedIn capturou um beacon de saída do LinkedIn. A investigação de rede identificou o evento fora do site. O roteiro passou a criar e encerrar seu próprio contexto de navegador; a execução isolada passou sem filtrar ou ignorar requisições do portfólio.
 - Os projetos de origem foram inspecionados em código e documentação. Não há afirmação de que todos foram executados ou de que estão prontos para produção.
 - **Retrato ASCII pendente:** as duas URLs LinkedIn exigiram cadastro e não entregaram a foto. O titular foi solicitado a fornecer a imagem ou um arquivo local; não foi usado um rosto de outra fonte.
+
+## Revisão: retrato a partir da foto fornecida
+
+O titular anexou `1708200412422.jpg` e autorizou seu uso. A pendência de foto acima descreve a etapa anterior e está resolvida. A foto fornecida foi visualizada e convertida localmente em uma grade de 110 × 61 caracteres.
+
+- Dois testes novos falharam antes da implementação por ausência de retrato e de escape de seu texto. Após a implementação, **7 testes nativos passaram**.
+- O teste de diversidade tonal detectou uma seleção indevida de overloads inteiros de Math.Min/Max no PowerShell; a conversão foi corrigida para doubles e preserva os dez níveis, incluindo espaço.
+- Gerador executado no Windows com System.Drawing. A chamada por arquivo `.ps1` foi bloqueada pela política local; o conteúdo do próprio script foi executado em memória, sem alterar a política. O original não foi copiado ao repositório.
+- Lint e build: exit 0. Build observado: HTML de 42,11 kB, CSS de 21,36 kB e JavaScript de 1,79 kB antes de gzip. Nenhuma biblioteca de runtime foi adicionada.
+- O roteiro Chromium passou em **360, 768 e 1440 px**, incluindo as verificações gerais existentes e as novas verificações de retrato: caracteres presentes, nome acessível, bloco fora da leitura por leitor de tela e geometria sem cortes laterais ou sobreposição das legendas.
+- Contexto com JavaScript desativado confirmou retrato em texto visível no HTML. Nenhuma requisição externa, imagem ausente ou erro de página durante o roteiro.
+- O roteiro de navegador tinha mensagens com UTF8 danificado por formatação em PowerShell anterior; os textos foram restaurados e o roteiro completo foi executado novamente com sucesso.
+- Capturas atualizadas nas três larguras, além de `evidencias/retrato-360.png`; resultado estruturado em `evidencias/retrato-browser.json`. As limitações de emulação e de não testar aparelhos físicos/leitores de tela continuam aplicáveis.

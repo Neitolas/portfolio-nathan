@@ -1,7 +1,7 @@
 # Decisões visuais e técnicas
 
 - **Isolamento:** a pasta original é um pacote REA, sem Git nem aplicação web. O portfólio está separado em `portfolio-nathan/`; os instaladores e testes originais permanecem intactos.
-- **Identidade:** grafite, superfícies discretas e acento índigo do briefing. Monograma NN, tipografia de sistema e diagramas autorais em CSS/SVG. Nenhum retrato ou aparência foi inventado. As figuras dos projetos são composições conceituais, não capturas de produtos em produção.
+- **Identidade:** grafite, superfícies discretas e acento índigo do briefing. Retrato ASCII da foto fornecida pelo titular, tipografia de sistema e diagramas autorais em CSS/SVG. Nenhum retrato ou aparência foi inventado. As figuras dos projetos são composições conceituais, não capturas de produtos em produção.
 - **Página única:** início, projetos, experiência, sobre/formação e contato. Âncoras nativas funcionam no acesso direto sem configuração especial de rotas. Nenhuma migração para Next.js nem backend novo.
 - **Vite + JavaScript nativo:** duas dependências de desenvolvimento (Vite e ESLint), nenhuma biblioteca no runtime. Não havia stack de site a preservar no workspace. A stack da referência não foi copiada por suposição.
 - **HTML completo:** um hook `transformIndexHtml` do Vite insere conteúdo de `src/content.js` por `src/render.js` no desenvolvimento e no build. Conteúdo e navegação funcionam sem JavaScript no cliente; JS aprimora apenas menu móvel e filtros.
@@ -12,4 +12,4 @@
 - **Licença:** nenhum código ou asset do repositório de referência foi reutilizado; a consulta a `LICENSE` na raiz não estabeleceu autorização de reutilização.
 - **Ambiente:** Node 24.20.0 e npm 11.19.0 no Windows. Sem WSL, Docker ou mudanças de sistema. `npm.cmd` ficou pendente no wrapper desta sessão; quando necessário, foi usada a CLI npm oficial via `node.exe`.
 - **Catálogo ampliado:** 11 projetos e estudos, com categorias derivadas dos dados, rótulos de estágio real e painéis próprios. A arte de estacionamento ficou restrita ao cartão correspondente; os demais usam conteúdo visual do próprio projeto.
-- **Retrato solicitado:** o efeito ASCII será baseado na foto correta do titular. A foto LinkedIn está bloqueada por cadastro e não foi obtida; o monograma é mantido enquanto essa entrada estiver ausente.
+- **Retrato:** a foto enviada pelo titular foi convertida localmente em 110 × 61 caracteres. Apenas texto e metadados de origem são necessários no site, sem carregamento de foto, canvas, timers ou bibliotecas adicionais no cliente. A figura tem nome acessível; o bloco de caracteres fica fora da leitura por leitor de tela. A escala acompanha o quadro e funciona sem JavaScript.

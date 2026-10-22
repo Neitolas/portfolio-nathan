@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-22",
+  "browser": "Chromium via Playwright",
+  "buildOrigin": "http://127.0.0.1:4173",
+  "viewports": [
+    {
+      "width": 360,
+      "height": 960,
+      "horizontalOverflow": false,
+      "projectFilters": true,
+      "keyboardDetails": true,
+      "anchors": true,
+      "reducedMotion": true,
+      "mobileMenu": true
+    },
+    {
+      "width": 768,
+      "height": 960,
+      "horizontalOverflow": false,
+      "projectFilters": true,
+      "keyboardDetails": true,
+      "anchors": true,
+      "reducedMotion": true,
+      "mobileMenu": "desktop navigation"
+    },
+    {
+      "width": 1440,
+      "height": 960,
+      "horizontalOverflow": false,
+      "projectFilters": true,
+      "keyboardDetails": true,
+      "anchors": true,
+      "reducedMotion": true,
+      "mobileMenu": "desktop navigation"
+    }
+  ],
+  "noJavaScript360": true,
+  "pageErrors": [],
+  "failedRequests": [],
+  "externalRequests": [],
+  "subpath": {
+    "url": "http://127.0.0.1:4174/portfolio-test/#projetos",
+    "passed": true,
+    "missingResources": []
+  },
+  "limitations": [
+    "Viewport emulation, no physical device testing",
+    "No Safari/WebKit/Firefox or screen reader testing",
+    "External LinkedIn profile not accessible; no email sent",
+    "No production-host deployment yet"
+  ]
+}

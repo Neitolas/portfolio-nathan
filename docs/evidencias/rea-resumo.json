@@ -1,0 +1,105 @@
+{
+    "date":  "2026-10-22",
+    "tool":  "rea-agents 6.7.0",
+    "command":  "rea analyze-javascript-application \u003cabsolute-src-directory\u003e --format json",
+    "exitCode":  0,
+    "scope":  [
+                  "src/content.js",
+                  "src/main.js",
+                  "src/render.js"
+              ],
+    "evidenceId":  "ev_a9fae9885d77d5d5ba796a47b6bf4038df35ebbbe33fc60940f352507288b972",
+    "subjectSha256":  "932f7979cea31d6983cdfc9d38f9a13085cf34b4c165ad0ae863cc93dd7a01b5",
+    "applicationGraphCoverage":  {
+                                     "status":  "complete",
+                                     "truncated":  false,
+                                     "omitted_count":  0,
+                                     "limits":  [
+
+                                                ]
+                                 },
+    "semanticGraphStatus":  "unknown",
+    "semanticFamilies":  [
+                             {
+                                 "family":  "boundary",
+                                 "status":  "partial",
+                                 "retained_relations":  4,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "call-flow",
+                                 "status":  "partial",
+                                 "retained_relations":  171,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "child-process",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "closure",
+                                 "status":  "partial",
+                                 "retained_relations":  68,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "configuration",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "data-flow",
+                                 "status":  "partial",
+                                 "retained_relations":  591,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "event",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "object-flow",
+                                 "status":  "partial",
+                                 "retained_relations":  208,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "promise-ownership",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "request",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "resource-lifecycle",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             },
+                             {
+                                 "family":  "timer",
+                                 "status":  "partial",
+                                 "retained_relations":  0,
+                                 "omitted_relations":  0
+                             }
+                         ],
+    "limitations":  [
+                        "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+                        "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+                        "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+                        "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+                        "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+                    ],
+    "rawEvidence":  "Retained locally, excluded from public Git because it includes workstation paths.",
+    "initialSandboxAttempt":  "Exit 1; Windows native self-test denied access to a parent path; partial evidence retained locally."
+}

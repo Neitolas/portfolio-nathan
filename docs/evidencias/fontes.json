@@ -1,0 +1,55 @@
+{
+  "consultedAt": "2026-10-22",
+  "repositories": [
+    {
+      "repository": "Neitolas/fenix",
+      "url": "https://github.com/Neitolas/fenix",
+      "visibility": "public",
+      "treeSha": "97b58fe2aeb247440aa61db62b880e9a8221f0c6",
+      "readme": {
+        "url": "https://github.com/Neitolas/fenix/blob/main/README.md",
+        "sha": "463b500f6ff6a2a949177699430b83ed4994c13d"
+      }
+    },
+    {
+      "repository": "Neitolas/django-api",
+      "url": "https://github.com/Neitolas/django-api",
+      "visibility": "public",
+      "treeSha": "a2dd9a70fb54a05bb0841ca829d3163fee0a61a7",
+      "readme": {
+        "url": "https://github.com/Neitolas/django-api/blob/main/README.md",
+        "sha": "715c61645913aa3a6c1fc4e713ae5e2c00413e7f"
+      }
+    },
+    {
+      "repository": "Neitolas/Sistema-de-Controle-de-Estacionamento-Inteligente",
+      "url": "https://github.com/Neitolas/Sistema-de-Controle-de-Estacionamento-Inteligente",
+      "visibility": "public",
+      "treeSha": "f3bda92cdf24fabac2941ef6d9f1bf6a1f38eba3",
+      "readme": {
+        "url": "https://github.com/Neitolas/Sistema-de-Controle-de-Estacionamento-Inteligente/blob/master/README.md",
+        "sha": "72962b29ad65c8d225183f4c2d91aa068cbb0533"
+      }
+    }
+  ],
+  "profile": {
+    "url": "https://github.com/Neitolas/Neitolas/blob/main/README.md",
+    "sha": "304079109254e34f5d96b18d2aa4f611320fbf99"
+  },
+  "reference": {
+    "url": "https://codedbywallace.dev/portfolio/",
+    "repository": "https://github.com/wallacemv/portfolio",
+    "licenseCheck": "LICENSE na raiz retornou 404; nenhuma autorização de reutilização estabelecida. Nenhum arquivo reutilizado.",
+    "observations": [
+      "navegação por seções",
+      "projetos",
+      "sobre",
+      "contato",
+      "chat e infraestrutura não adotados"
+    ]
+  },
+  "linkedin": {
+    "url": "https://www.linkedin.com/in/devnathannogueiracarrara/",
+    "status": "Não acessível pelo leitor web nesta execução; sem alegação de leitura do perfil."
+  }
+}

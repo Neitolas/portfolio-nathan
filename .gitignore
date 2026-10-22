@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.npm-cache/
+*.log
+.env*
+!.env.example
+.rea-cache/
+.chrome-profile/
+.serena/
+docs/evidencias/rea-src*.json
+docs/superpowers/

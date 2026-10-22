@@ -88,3 +88,12 @@ O titular anexou `1708200412422.jpg` e autorizou seu uso. A pendência de foto a
 - Contexto com JavaScript desativado confirmou retrato em texto visível no HTML. Nenhuma requisição externa, imagem ausente ou erro de página durante o roteiro.
 - O roteiro de navegador tinha mensagens com UTF8 danificado por formatação em PowerShell anterior; os textos foram restaurados e o roteiro completo foi executado novamente com sucesso.
 - Capturas atualizadas nas três larguras, além de `evidencias/retrato-360.png`; resultado estruturado em `evidencias/retrato-browser.json`. As limitações de emulação e de não testar aparelhos físicos/leitores de tela continuam aplicáveis.
+
+## Revisão: fundo preto e remoção de textos decorativos
+
+Atendendo à revisão visual do titular, o retrato passou para 160 × 88 caracteres, com contorno manual da silhueta para excluir o cenário e contraste ajustado. Os caracteres claros aparecem em preto puro, sem moldura, gradiente ou legendas. O fundo base da página também passou a preto.
+
+- Removidos os rótulos do retrato, as legendas repetidas das artes de projetos, slogans, subtítulos decorativos, introduções genéricas e contextos repetidos de tecnologias. Os títulos de seção e botões de detalhes agora são diretos. Informações dos 11 projetos, formação, experiência, navegação e nomes acessíveis permanecem presentes.
+- O teste do retrato falhou com os dados antigos; após a geração, **7 testes passaram**, incluindo definição maior e cenário vazio nas laterais da metade superior.
+- Lint e build concluídos com exit 0. HTML de 45,11 kB, CSS de 18,27 kB e JS de 1,79 kB antes de gzip.
+- Chromium em 360, 768 e 1440 px passou, verificando preto puro sem gradiente, ausência das legendas removidas, retrato inteiro, filtros, teclado, âncoras e conteúdo sem JavaScript. Sem erros de página, requisições ausentes ou origens externas. Evidência atual em `evidencias/retrato-browser.json` e capturas atualizadas.

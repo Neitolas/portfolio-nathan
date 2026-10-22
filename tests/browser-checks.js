@@ -27,13 +27,15 @@ async (sourcePage, { artifactDirectory } = {}) => {
           label: frame.getAttribute('aria-label'),
           bounds: element.getBoundingClientRect().toJSON(),
           frame: frame.getBoundingClientRect().toJSON(),
-          topCaption: frame.querySelector('.identity-top').getBoundingClientRect().toJSON(),
-          bottomCaption: frame.querySelector('.identity-bottom').getBoundingClientRect().toJSON(),
+          background: getComputedStyle(frame).backgroundColor,
+          backgroundImage: getComputedStyle(frame).backgroundImage,
         };
       });
       check(portrait.textLength > 6000 && portrait.hiddenFromScreenReader && portrait.label.includes('Nathan'), 'Retrato ASCII ou alternativa acessível ausente');
       check(portrait.bounds.left >= portrait.frame.left && portrait.bounds.right <= portrait.frame.right, `Retrato corta nas laterais em ${width}`);
-      check(portrait.bounds.top >= portrait.topCaption.bottom + 3 && portrait.bounds.bottom <= portrait.bottomCaption.top - 3, `Retrato sobrepõe legendas em ${width}`);
+      check(portrait.bounds.top >= portrait.frame.top && portrait.bounds.bottom <= portrait.frame.bottom, `Retrato corta na vertical em ${width}`);
+      check(portrait.background === 'rgb(0, 0, 0)' && portrait.backgroundImage === 'none', 'O fundo do retrato deve ser preto puro');
+      check(await page.locator('.identity-top, .identity-bottom, .hero-baseline, .art-topline, .art-bottomline, .skills-note').count() === 0, 'Rótulos decorativos ainda presentes');
       const projectCategories = await page.locator('[data-project]').evaluateAll((elements) => elements.map((element) => element.dataset.project));
       projectCount = projectCategories.length;
       check(projectCount >= 11, 'O catálogo ampliado deveria ter ao menos onze projetos e estudos');
@@ -76,7 +78,7 @@ async (sourcePage, { artifactDirectory } = {}) => {
       await details.locator('summary').focus();
       await page.keyboard.press('Enter');
       check(await details.getAttribute('open') !== null, 'Detalhes não abriram com teclado');
-      check(await details.getByRole('link', { name: 'Consultar evidência' }).isVisible(), 'Evidência indisponível');
+      check(await details.getByRole('link', { name: 'Ver implementação' }).isVisible(), 'Implementação indisponível');
       await details.locator('summary').press('Enter');
 
       await page.emulateMedia({ reducedMotion: 'reduce' });

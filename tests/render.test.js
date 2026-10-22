@@ -65,6 +65,8 @@ test('a vitrine inclui os demais projetos verificados e identifica seus limites'
 test('o retrato da foto fornecida é texto acessível e já vem no HTML, sem depender de imagem ou JS no cliente', () => {
   assert.ok(profile.portrait?.text, 'A foto fornecida precisa ser convertida em caracteres');
   const lines = profile.portrait.text.split('\n');
+  assert.ok(profile.portrait.columns >= 140, 'O retrato precisa ter mais detalhes que a versão inicial');
+  assert.ok(lines.slice(0, Math.floor(lines.length / 2)).every((line) => /^\s{20}/.test(line) && /\s{20}$/.test(line)), 'O cenário ao redor do rosto precisa ficar vazio');
   assert.equal(lines.length, profile.portrait.rows);
   assert.ok(lines.every((line) => line.length === profile.portrait.columns));
   assert.ok(new Set(profile.portrait.text.replace(/\s/g, '')).size >= 6, 'O retrato precisa preservar os tons da fotografia');

@@ -26,4 +26,4 @@ SHAs e links dos oito projetos acrescentados estão em `evidencias/catalogo-font
 
 ## Retrato em texto solicitado
 
-A referência usa uma imagem convertida em caracteres segundo a luminosidade. As duas URLs conhecidas do LinkedIn exigiram cadastro; em seguida o titular forneceu diretamente `1708200412422.jpg` e autorizou seu uso. Essa foto foi convertida em uma grade de 110 colunas por 61 linhas e o retrato em texto substituiu o monograma. A origem e a geração estão em `retrato-ascii.md`; a imagem não foi extraída do LinkedIn.
+A referência usa uma imagem convertida em caracteres segundo a luminosidade. As duas URLs conhecidas do LinkedIn exigiram cadastro; em seguida o titular forneceu diretamente `1708200412422.jpg` e autorizou seu uso. A versão atual usa 160 colunas por 88 linhas, com o cenário removido e fundo preto. A origem e a geração estão em `retrato-ascii.md`; a imagem não foi extraída do LinkedIn.

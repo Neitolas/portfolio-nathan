@@ -38,5 +38,10 @@
   ],
   "date": "2026-10-22",
   "source": "Foto fornecida pelo titular",
-  "browser": "Chromium via Playwright"
+  "browser": "Chromium via Playwright",
+  "scope": "Retrato com cenario removido, fundo preto e rotulos decorativos retirados",
+  "portraitColumns": 160,
+  "portraitRows": 88,
+  "pureBlackPortraitBackground": true,
+  "decorativeLabelsRemoved": true
 }

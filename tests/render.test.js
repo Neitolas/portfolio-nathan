@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { profile } from '../src/content.js';
 import { renderPortfolio, escapeHtml } from '../src/render.js';
 
-const pages = ['home', 'projects', 'infra', 'paint', 'about'];
+const pages = ['home', 'projects', 'development', 'paint', 'about'];
 
 test('as cinco páginas têm identidade própria, navegação real e aba atual', () => {
   for (const page of pages) {
@@ -11,7 +11,8 @@ test('as cinco páginas têm identidade própria, navegação real e aba atual',
     assert.equal((html.match(/<h1[ >]/g) || []).length, 1);
     assert.equal((html.match(/aria-current="page"/g) || []).length, 1);
     assert.ok(html.includes(`data-page="${page}"`));
-    for (const label of ['Home', 'Projetos', 'Infra', 'Paint', 'Sobre']) assert.ok(html.includes(`>${label}</span>`));
+    for (const label of ['Home', 'Projetos', 'Desenvolvimento', 'Paint', 'Sobre']) assert.ok(html.includes(`>${label}</span>`));
+    assert.ok(!html.includes('Infraestrutura') && !html.includes('href="../infra/"'));
     assert.ok(html.includes(profile.email));
     assert.ok(!/wallacemv|Wallace|Sem Parar|Kubernetes|Gemini|VPS Ubuntu/.test(html));
     assert.ok(!/href="(?:#|)"/.test(html));
@@ -53,10 +54,11 @@ test('sobre mantém as três experiências e formação sem atribuir títulos da
   assert.ok(!/Senior Java|15 anos/.test(html));
 });
 
-test('infra e paint têm conteúdo e ferramentas próprias, sem infraestrutura fictícia', () => {
-  const infra = renderPortfolio(profile, 'infra');
-  assert.ok(infra.includes('GitHub Actions'));
-  assert.ok(infra.includes('portfolio-nathan/actions'));
+test('desenvolvimento apresenta Backend, Frontend e IA com projetos reais, e o Paint mantém suas ferramentas', () => {
+  const development = renderPortfolio(profile, 'development');
+  for (const area of ['Backend', 'Frontend', 'Inteligência Artificial']) assert.ok(development.includes(area));
+  for (const repository of ['django-api', 'fenix', 'rag-sorveteria']) assert.ok(development.includes(`https://github.com/Neitolas/${repository}`));
+  assert.ok(!/GitHub Actions|Fluxo de validação|Servidor/.test(development));
   const paint = renderPortfolio(profile, 'paint');
   assert.ok(paint.includes('data-paint-canvas'));
   for (const control of ['Desfazer', 'Limpar', 'Baixar PNG']) assert.ok(paint.includes(control));

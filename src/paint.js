@@ -48,7 +48,7 @@ export function mountPaint(root) {
     context.save();
     context.translate(190, 15);
     context.scale(6, 6);
-    context.strokeStyle = '#334155';
+    context.strokeStyle = '#4e3268';
     context.lineWidth = .7;
     context.lineJoin = 'round';
     context.beginPath();

@@ -110,3 +110,13 @@ O pedido seguinte do titular substituiu o layout anterior por uma reconstrução
 - Paint: desenho por mouse e teclado, desfazer com igualdade dos pixels, download PNG, upload local e rejeição de arquivo inválido conferidos. Moldes vetoriais são próprios.
 - A revisão encontrou canvas pequeno em paisagem, contato acima da tela baixa, upload pendente substituindo ação posterior e mistura de dois ponteiros. Foram corrigidos. As regressões em 640 × 360/320, descarte e fechamento do bitmap antigo e dois dedos via eventos reais de toque no Chromium passaram.
 - Revisão de código concluída sem problemas relevantes remanescentes. Capturas de início, projetos, sobre, infra e paint em `evidencias/`. Não foram usados aparelhos físicos nem leitor de tela.
+
+## Revisão: roxo, enquadramento e Desenvolvimento
+
+O titular esclareceu que não atua com infraestrutura e solicitou Backend, Frontend e IA, paleta roxa e enquadramento do retrato na borda. A página e entrada Infra foram substituídas por Desenvolvimento. Os registros anteriores descrevem as versões anteriores.
+
+- **8 testes nativos passaram**, incluindo ausência da navegação Infra e presença das três áreas com links para projetos reais. Lint e build concluídos com exit 0; cinco documentos HTML gerados, CSS de 15,72 kB e JS de 5,36 kB antes de gzip.
+- Chromium em **360, 768 e 1440 px**, cinco páginas por largura: navegação, contato/teclado/Escape, onze projetos, filtros, detalhes, desenho/desfazer/exportação e navegação sem JS passaram. Sem erros de página, recursos ausentes ou chamadas externas.
+- A altura das linhas do retrato passou a acompanhar as dimensões da grade. Verificado que o bloco mantém a proporção da borda quadrada e fica inteiro dentro dela nas três larguras, sobre preto puro com contorno branco. Capturas conferidas visualmente.
+- Paleta roxa aplicada a fundos, superfícies, bordas, ícones, etiquetas, contato e detalhes do Paint. O retrato usa lavanda claro; o branco da moldura e da área de desenho foi preservado.
+- Evidência atual em `evidencias/roxo-desenvolvimento-browser.json`; capturas atualizadas. Sem teste em aparelhos físicos ou leitores de tela.

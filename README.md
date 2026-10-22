@@ -2,7 +2,7 @@
 
 [![Validar portfólio](https://github.com/Neitolas/portfolio-nathan/actions/workflows/ci.yml/badge.svg)](https://github.com/Neitolas/portfolio-nathan/actions/workflows/ci.yml)
 
-Portfólio pessoal de Nathan, com **11 projetos e estudos**, experiência, formação e contato. Reconstruído a pedido do titular para seguir de perto a apresentação da referência: abas com ícones, fonte Chakra Petch, círculos translúcidos, cartões horizontais e rodapé fixo. Conteúdo próprio, retrato da foto fornecida e implementação independente.
+Portfólio pessoal de Nathan, com **11 projetos e estudos**, experiência, formação e contato. Apresentação próxima da referência, com paleta roxa, abas com ícones, fonte Chakra Petch, círculos translúcidos, cartões horizontais e rodapé fixo. Conteúdo próprio e retrato da foto fornecida, enquadrado na moldura branca. A página Desenvolvimento apresenta Backend, Frontend e IA.
 
 ![Início do portfólio](docs/evidencias/inicio-1440.png)
 
@@ -48,7 +48,7 @@ node.exe $portfolioNpmCli run dev
 | `src/paint.js` | Desenho, moldes próprios, upload local, desfazer e exportação PNG |
 | `src/style.css` | Identidade visual, layout responsivo e movimento reduzido |
 | `vite.config.js` | Cinco entradas HTML estáticas e assets relativos |
-| `index.html`, `projects/`, `infra/`, `paint/`, `about/` | Entradas de Home, Projetos, Infra, Paint e Sobre |
+| `index.html`, `projects/`, `development/`, `paint/`, `about/` | Entradas de Home, Projetos, Desenvolvimento, Paint e Sobre |
 | `public/fonts/` | Chakra Petch Regular/Bold e licença SIL OFL 1.1 |
 | `tests/render.test.js` | Testes nativos de renderização e segurança do HTML |
 | `tests/browser-checks.js` | Função de QA para executar com uma página Playwright existente |
@@ -86,4 +86,4 @@ Para publicar o site em um serviço estático, use:
 | Diretório de saída | `dist` |
 | Branch de produção sugerida | `main` |
 
-O `base: './'` permite servir os arquivos na raiz ou em subpasta. Cada rota tem seu próprio `index.html` e não exige fallback de SPA: `/`, `/projects/`, `/infra/`, `/paint/` e `/about/`. Isso foi verificado também sob `/demo/`. Após escolher o domínio, configurar canonical, `og:url` e imagem social absoluta com o endereço real. Não há deploy automático para um host; o workflow incluído executa verificações.
+O `base: './'` permite servir os arquivos na raiz ou em subpasta. Cada rota tem seu próprio `index.html` e não exige fallback de SPA: `/`, `/projects/`, `/development/`, `/paint/` e `/about/`. Após escolher o domínio, configurar canonical, `og:url` e imagem social absoluta com o endereço real. Não há deploy automático para um host; o workflow incluído executa verificações.

@@ -8,7 +8,6 @@ export const profile = {
   role: 'Desenvolvedor Full Stack Júnior',
   description: 'Desenvolvo aplicações web, APIs e integrações. Meu foco é conectar interfaces, regras de negócio e dados para resolver problemas reais.',
   email: 'nathancarraranogueira@gmail.com',
-  siteRepository: 'https://github.com/Neitolas/portfolio-nathan',
   links: {
     github: 'https://github.com/Neitolas',
     linkedin: 'https://www.linkedin.com/in/devnathannogueiracarrara/',
@@ -218,6 +217,29 @@ export const profile = {
     institution: 'UNIMAR',
     status: 'Graduação em andamento',
   },
+  development: [
+    {
+      title: 'Backend',
+      icon: 'code',
+      description: 'APIs, integrações e regras de negócio com Python, Django e PHP, conectando aplicações aos bancos de dados.',
+      technologies: ['Python', 'Django', 'Django REST Framework', 'PHP', 'PostgreSQL', 'MySQL', 'SQLite'],
+      projectIds: ['api', 'fenix', 'estacionamento'],
+    },
+    {
+      title: 'Frontend',
+      icon: 'projects',
+      description: 'Interfaces e componentes com React, TypeScript e Vue, integrando a experiência de uso às APIs.',
+      technologies: ['React', 'TypeScript', 'JavaScript', 'Vue', 'HTML', 'CSS'],
+      projectIds: ['fenix', 'rag', 'react-estudos'],
+    },
+    {
+      title: 'Inteligência Artificial',
+      icon: 'chat',
+      description: 'Estudos e aplicações com modelos de linguagem, recuperação de contexto (RAG) e embeddings, conectando dados às respostas de uma interface de conversa.',
+      technologies: ['Python', 'Django', 'RAG', 'Embeddings', 'React'],
+      projectIds: ['rag'],
+    },
+  ],
   skills: [
     { title: 'Backend & APIs', items: ['Python', 'Django', 'Django REST Framework', 'PHP', 'APIs REST'] },
     { title: 'IA & integrações', items: ['RAG', 'Chatbots', 'Embeddings', 'Integrações REST'] },

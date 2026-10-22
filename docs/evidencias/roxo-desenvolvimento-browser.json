@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-22",
+  "scope": "Paleta roxa, retrato proporcional à borda e Desenvolvimento em Backend/Frontend/IA",
+  "browser": "Chromium via Playwright",
+  "results": [
+    {
+      "width": 360,
+      "pages": 5,
+      "horizontalOverflow": false,
+      "navigation": true,
+      "contactKeyboard": true,
+      "whitePortraitBorder": true,
+      "projectFilters": true,
+      "projectList": true,
+      "reducedMotion": true
+    },
+    {
+      "width": 768,
+      "pages": 5,
+      "horizontalOverflow": false,
+      "navigation": true,
+      "contactKeyboard": true,
+      "whitePortraitBorder": true,
+      "projectFilters": true,
+      "projectList": true,
+      "reducedMotion": true
+    },
+    {
+      "width": 1440,
+      "pages": 5,
+      "horizontalOverflow": false,
+      "navigation": true,
+      "contactKeyboard": true,
+      "whitePortraitBorder": true,
+      "projectFilters": true,
+      "projectList": true,
+      "reducedMotion": true
+    }
+  ],
+  "projectCount": 11,
+  "paintDrawing": true,
+  "paintUndo": true,
+  "paintKeyboard": true,
+  "paintDownload": true,
+  "noJavaScriptNavigation": true,
+  "pageErrors": [],
+  "failedRequests": [],
+  "requestOrigins": [
+    "http://127.0.0.1:4173"
+  ],
+  "portraitFrameRatio": true,
+  "developmentAreas": [
+    "Backend",
+    "Frontend",
+    "Inteligência Artificial"
+  ],
+  "infraNavigationRemoved": true,
+  "nativeTests": 8,
+  "lintExitCode": 0,
+  "buildExitCode": 0
+}

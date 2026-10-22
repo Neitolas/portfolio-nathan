@@ -15,7 +15,7 @@ async (sourcePage, { artifactDirectory } = {}) => {
   try {
     for (const width of [360, 768, 1440]) {
       await page.setViewportSize({ width, height: 960 });
-      for (const [key, path] of [['home', ''], ['projects', 'projects/'], ['infra', 'infra/'], ['paint', 'paint/'], ['about', 'about/']]) {
+      for (const [key, path] of [['home', ''], ['projects', 'projects/'], ['development', 'development/'], ['paint', 'paint/'], ['about', 'about/']]) {
         await page.goto(base + path, { waitUntil: 'networkidle' });
         await page.evaluate(() => document.fonts.ready);
         check(await page.locator(`[data-page="${key}"]`).count() === 1, `Página incorreta: ${path}`);
@@ -45,7 +45,12 @@ async (sourcePage, { artifactDirectory } = {}) => {
           check(portrait.textLength > 14000 && portrait.hidden === 'true' && portrait.label.includes('Nathan'), 'Retrato incompleto');
           check(portrait.background === 'rgb(0, 0, 0)' && portrait.border === 'rgb(255, 255, 255)' && portrait.borderWidth !== '0px', 'Fundo preto ou contorno branco ausente');
           check(portrait.bounds.left >= portrait.frame.left && portrait.bounds.right <= portrait.frame.right && portrait.bounds.top >= portrait.frame.top && portrait.bounds.bottom <= portrait.frame.bottom, 'Retrato cortado');
+          check(Math.abs(portrait.bounds.width / portrait.bounds.height - portrait.frame.width / portrait.frame.height) < .02, 'Retrato fora da proporção da borda');
           check(await page.locator('.identity-top, .identity-bottom, .hero-baseline').count() === 0, 'Legendas decorativas retornaram');
+        }
+        if (key === 'development') {
+          for (const name of ['Backend', 'Frontend', 'Inteligência Artificial']) check(await page.getByRole('heading', { name, exact: true }).isVisible(), `Área de desenvolvimento ausente: ${name}`);
+          check(await page.getByRole('navigation').getByRole('link', { name: 'Infra', exact: true }).count() === 0, 'Aba Infra ainda presente');
         }
         if (key === 'projects') {
           const categories = await page.locator('[data-project]').evaluateAll(elements => elements.map(element => element.dataset.project));

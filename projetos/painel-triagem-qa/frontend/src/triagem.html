@@ -1,0 +1,53 @@
+<header class="masthead">
+  <div class="wrap masthead-inner"><span class="brand">Triagem QA</span><span class="mode">Demonstração</span></div>
+</header>
+<main class="wrap">
+  <h1>Fila de defeitos</h1>
+  <section class="metrics" aria-label="Resumo da fila">
+    <div><span>Abertos</span><strong>{{ counts().open }}</strong></div>
+    <div><span>Em triagem</span><strong>{{ counts().triage }}</strong></div>
+    <div><span>Resolvidos</span><strong>{{ counts().resolved }}</strong></div>
+  </section>
+  @if (error()) { <p class="error" role="alert">{{ error() }}</p> }
+  @if (message()) { <p class="message" role="status">{{ message() }}</p> }
+  <div class="workspace">
+    <section aria-labelledby="list-title">
+      <div class="section-title"><h2 id="list-title">Defeitos</h2><span>{{ filtered().length }} encontrados</span></div>
+      <div class="filters">
+        <label>Buscar <input type="search" placeholder="Título ou descrição" [value]="search()" (input)="search.set($any($event.target).value)"></label>
+        <label>Status <select [value]="filter()" (change)="updateFilter($any($event.target).value)">
+          <option value="all">Todos</option><option value="open">Abertos</option><option value="triage">Em triagem</option><option value="resolved">Resolvidos</option>
+        </select></label>
+      </div>
+      @if (loading()) { <p role="status">Carregando defeitos…</p> }
+      @else if (error() && !bugs().length) { <button type="button" (click)="load()">Carregar novamente</button> }
+      @else if (!filtered().length) { <p class="empty">Nenhum defeito corresponde aos filtros.</p> }
+      @else {
+        <ul class="tickets">
+          @for (bug of filtered(); track bug.id) {
+            <li class="ticket">
+              <div class="ticket-main">
+                <h3>{{ bug.title }}</h3>
+                @if (bug.details) { <p>{{ bug.details }}</p> }
+                <div class="tags"><span [class]="bug.severity">Severidade {{ severities[bug.severity] }}</span><span>{{ statuses[bug.status] }}</span><time>{{ bug.createdAt | date:'dd/MM/yyyy' }}</time></div>
+              </div>
+              <button type="button" class="secondary" [disabled]="!!changing() || saving()" (click)="change(bug)">{{ nextLabel[bug.status] }}</button>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+    <section class="form-panel" aria-labelledby="form-title">
+      <h2 id="form-title">Novo defeito</h2>
+      <form [formGroup]="form" (ngSubmit)="create()">
+        <label>Título <input formControlName="title" maxlength="100" required></label>
+        @if (form.controls.title.touched && form.controls.title.value.trim().length < 3) { <p class="field-error">Use pelo menos 3 caracteres.</p> }
+        <label>Severidade <select formControlName="severity">
+          <option value="low">Baixa</option><option value="medium">Média</option><option value="high">Alta</option>
+        </select></label>
+        <label>Descrição <textarea formControlName="details" rows="4" maxlength="500" placeholder="O que aconteceu?"></textarea></label>
+        <button type="submit" class="primary" [disabled]="saving() || !!changing()">{{ saving() ? 'Registrando…' : 'Registrar defeito' }}</button>
+      </form>
+    </section>
+  </div>
+</main>
